@@ -68,19 +68,19 @@ namespace Crafting_System
                     lblItem1_prefix_3.Text = "";
                     break;
                 case 1:
-                    lblItem1_prefix_1.Text = equipmentItem.Prefixes[0].ToString();
+                    lblItem1_prefix_1.Text = equipmentItem.Prefixes[0].Affix.ToString();
                     lblItem1_prefix_2.Text = "";
                     lblItem1_prefix_3.Text = "";
                     break;
                 case 2:
-                    lblItem1_prefix_1.Text = equipmentItem.Prefixes[0].ToString();
-                    lblItem1_prefix_2.Text = equipmentItem.Prefixes[1].ToString();
+                    lblItem1_prefix_1.Text = equipmentItem.Prefixes[0].Affix.ToString();
+                    lblItem1_prefix_2.Text = equipmentItem.Prefixes[1].Affix.ToString();
                     lblItem1_prefix_3.Text = "";
                     break;
                 case 3:
-                    lblItem1_prefix_1.Text = equipmentItem.Prefixes[0].ToString();
-                    lblItem1_prefix_2.Text = equipmentItem.Prefixes[1].ToString();
-                    lblItem1_prefix_3.Text = equipmentItem.Prefixes[2].ToString();
+                    lblItem1_prefix_1.Text = equipmentItem.Prefixes[0].Affix.ToString();
+                    lblItem1_prefix_2.Text = equipmentItem.Prefixes[1].Affix.ToString();
+                    lblItem1_prefix_3.Text = equipmentItem.Prefixes[2].Affix.ToString();
                     break;
             }
             switch (equipmentItem.Suffixes.Count)
@@ -91,19 +91,19 @@ namespace Crafting_System
                     lblItem1_suffix_3.Text = "";
                     break;
                 case 1:
-                    lblItem1_suffix_1.Text = equipmentItem.Suffixes[0].ToString();
+                    lblItem1_suffix_1.Text = equipmentItem.Suffixes[0].Affix.ToString();
                     lblItem1_suffix_2.Text = "";
                     lblItem1_suffix_3.Text = "";
                     break;
                 case 2:
-                    lblItem1_suffix_1.Text = equipmentItem.Suffixes[0].ToString();
-                    lblItem1_suffix_2.Text = equipmentItem.Suffixes[1].ToString();
+                    lblItem1_suffix_1.Text = equipmentItem.Suffixes[0].Affix.ToString();
+                    lblItem1_suffix_2.Text = equipmentItem.Suffixes[1].Affix.ToString();
                     lblItem1_suffix_3.Text = "";
                     break;
                 case 3:
-                    lblItem1_suffix_1.Text = equipmentItem.Suffixes[0].ToString();
-                    lblItem1_suffix_2.Text = equipmentItem.Suffixes[1].ToString();
-                    lblItem1_suffix_3.Text = equipmentItem.Suffixes[2].ToString();
+                    lblItem1_suffix_1.Text = equipmentItem.Suffixes[0].Affix.ToString();
+                    lblItem1_suffix_2.Text = equipmentItem.Suffixes[1].Affix.ToString();
+                    lblItem1_suffix_3.Text = equipmentItem.Suffixes[2].Affix.ToString();
                     break;
             }
         }
