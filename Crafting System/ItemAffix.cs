@@ -2,18 +2,20 @@
 {
     public class ItemAffix
     {
-        public Affix Type { get; private set; }
-        public int MinValue { get; private set; }
-        public int MaxValue { get; private set; }
         public Affix Affix { get; private set; }
+        public AffixValue? Values { get; set; }
 
-        public ItemAffix(Affix type, int minValue, int maxValue, Affix affix)
+        public ItemAffix(Affix affix)
         {
-            Type = type;
-            MinValue = minValue;
-            MaxValue = maxValue;
             Affix = affix;
         }
+    }
+
+    public class AffixValue
+    {
+        public float MinValue { get; set; }
+        public float MaxValue { get; set; }
+        public float Value { get; set; }
     }
 
     

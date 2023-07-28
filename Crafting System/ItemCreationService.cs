@@ -41,6 +41,30 @@ namespace Crafting_System
                 _gearSlotSuffixPools.Add(slot, suffixesForSlot);
             }
         }
+
+        public AffixValue GetAffixValue(Affix affix, int level)
+        {
+            switch (affix)
+            {
+                case Affix.Armor: return RollArmor(level);
+                case Affix.AttackSpeed: return RollLowPercentageIncrease(level);
+                case Affix.CritChance: return RollLowPercentageIncrease(level);
+                case Affix.CritDamage: return RollHighPercentageIncrease(level);
+                case Affix.Dexterity: return RollBaseStat(level);
+                case Affix.DodgeChance: return RollLowPercentageIncrease(level);
+                case Affix.GoldFind: return RollHighPercentageIncrease(level);
+                case Affix.HealthRegen: return RollLowPercentageIncrease(level);
+                case Affix.Intelligence: return RollBaseStat(level);
+                case Affix.MagicFind: return RollHighPercentageIncrease(level);
+                case Affix.MovementSpeed: return RollLowPercentageIncrease(level);
+                case Affix.Projectiles: return RollSkillOrProjectileIncrease(level);
+                case Affix.SpellRadius: return RollLowPercentageIncrease(level);
+                case Affix.Strength: return RollBaseStat(level);
+                case Affix.Willpower: return RollBaseStat(level);
+                default: return new AffixValue();
+            }
+        }
+
         private List<ItemAffix> GetAffixesForSlot(GearSlot slot, AffixType affixType)
         {
             List<ItemAffix> affixes = new List<ItemAffix>();
@@ -51,208 +75,208 @@ namespace Crafting_System
                 case GearSlot.Head:
                     affixes.AddRange(affixType == AffixType.Prefix
                         ? new[] {
-                            new ItemAffix(Affix.CritChance, 1, 5, Affix.CritChance),
-                            new ItemAffix(Affix.CritDamage, 1, 5, Affix.CritDamage),
-                            new ItemAffix(Affix.Dexterity, 1, 5, Affix.Dexterity),
-                            new ItemAffix(Affix.Intelligence, 1, 5, Affix.Intelligence),
-                            new ItemAffix(Affix.Strength, 1, 5, Affix.Strength),
-                            new ItemAffix(Affix.Willpower, 1, 5, Affix.Willpower),
+                            new ItemAffix(Affix.CritChance),
+                            new ItemAffix(Affix.CritDamage),
+                            new ItemAffix(Affix.Dexterity),
+                            new ItemAffix(Affix.Intelligence),
+                            new ItemAffix(Affix.Strength),
+                            new ItemAffix(Affix.Willpower),
                         }
                         : new[] {
-                            new ItemAffix(Affix.GoldFind, 1, 5, Affix.GoldFind),
-                            new ItemAffix(Affix.MagicFind, 1, 5, Affix.MagicFind),
-                            new ItemAffix(Affix.SpellRadius, 1, 5, Affix.SpellRadius),
+                            new ItemAffix(Affix.GoldFind),
+                            new ItemAffix(Affix.MagicFind),
+                            new ItemAffix(Affix.SpellRadius),
                         });
                     break;
                 case GearSlot.Shoulders:
                     affixes.AddRange(affixType == AffixType.Prefix
                         ? new[] {
-                            new ItemAffix(Affix.CritChance, 1, 5, Affix.CritChance),
-                            new ItemAffix(Affix.CritDamage, 1, 5, Affix.CritDamage),
-                            new ItemAffix(Affix.Dexterity, 1, 5, Affix.Dexterity),
-                            new ItemAffix(Affix.Intelligence, 1, 5, Affix.Intelligence),
-                            new ItemAffix(Affix.Strength, 1, 5, Affix.Strength),
-                            new ItemAffix(Affix.Willpower, 1, 5, Affix.Willpower),
+                            new ItemAffix(Affix.CritChance),
+                            new ItemAffix(Affix.CritDamage),
+                            new ItemAffix(Affix.Dexterity),
+                            new ItemAffix(Affix.Intelligence),
+                            new ItemAffix(Affix.Strength),
+                            new ItemAffix(Affix.Willpower),
                         }
                         : new[] {
-                            new ItemAffix(Affix.DodgeChance, 1, 5, Affix.DodgeChance),
-                            new ItemAffix(Affix.GoldFind, 1, 5, Affix.GoldFind),
-                            new ItemAffix(Affix.HealthRegen, 1, 5, Affix.HealthRegen),
-                            new ItemAffix(Affix.MagicFind, 1, 5, Affix.MagicFind),
+                            new ItemAffix(Affix.DodgeChance),
+                            new ItemAffix(Affix.GoldFind),
+                            new ItemAffix(Affix.HealthRegen),
+                            new ItemAffix(Affix.MagicFind),
                         });
                     break;
                 case GearSlot.Chest:
                     affixes.AddRange(affixType == AffixType.Prefix
                         ? new[] {
-                            new ItemAffix(Affix.CritChance, 1, 5, Affix.CritChance),
-                            new ItemAffix(Affix.CritDamage, 1, 5, Affix.CritDamage),
-                            new ItemAffix(Affix.Dexterity, 1, 5, Affix.Dexterity),
-                            new ItemAffix(Affix.Intelligence, 1, 5, Affix.Intelligence),
-                            new ItemAffix(Affix.Strength, 1, 5, Affix.Strength),
-                            new ItemAffix(Affix.Willpower, 1, 5, Affix.Willpower),
+                            new ItemAffix(Affix.CritChance),
+                            new ItemAffix(Affix.CritDamage),
+                            new ItemAffix(Affix.Dexterity),
+                            new ItemAffix(Affix.Intelligence),
+                            new ItemAffix(Affix.Strength),
+                            new ItemAffix(Affix.Willpower),
                         }
                         : new[] {
-                            new ItemAffix(Affix.DodgeChance, 1, 5, Affix.DodgeChance),
-                            new ItemAffix(Affix.GoldFind, 1, 5, Affix.GoldFind),
-                            new ItemAffix(Affix.HealthRegen, 1, 5, Affix.HealthRegen),
-                            new ItemAffix(Affix.MagicFind, 1, 5, Affix.MagicFind),
-                            new ItemAffix(Affix.SpellRadius, 1, 5, Affix.SpellRadius),
+                            new ItemAffix(Affix.DodgeChance),
+                            new ItemAffix(Affix.GoldFind),
+                            new ItemAffix(Affix.HealthRegen),
+                            new ItemAffix(Affix.MagicFind),
+                            new ItemAffix(Affix.SpellRadius),
                         });
                     break;
                 case GearSlot.Gloves:
                     affixes.AddRange(affixType == AffixType.Prefix
                         ? new[] {
-                            new ItemAffix(Affix.AttackSpeed, 1, 5, Affix.AttackSpeed),
-                            new ItemAffix(Affix.CritChance, 1, 5, Affix.CritChance),
-                            new ItemAffix(Affix.CritDamage, 1, 5, Affix.CritDamage),
-                            new ItemAffix(Affix.Dexterity, 1, 5, Affix.Dexterity),
-                            new ItemAffix(Affix.Intelligence, 1, 5, Affix.Intelligence),
-                            new ItemAffix(Affix.Projectiles, 1, 5, Affix.Projectiles),
-                            new ItemAffix(Affix.Strength, 1, 5, Affix.Strength),
-                            new ItemAffix(Affix.Willpower, 1, 5, Affix.Willpower),
+                            new ItemAffix(Affix.AttackSpeed),
+                            new ItemAffix(Affix.CritChance),
+                            new ItemAffix(Affix.CritDamage),
+                            new ItemAffix(Affix.Dexterity),
+                            new ItemAffix(Affix.Intelligence),
+                            new ItemAffix(Affix.Projectiles),
+                            new ItemAffix(Affix.Strength),
+                            new ItemAffix(Affix.Willpower),
                         }
                         : new[] {
-                            new ItemAffix(Affix.DodgeChance, 1, 5, Affix.DodgeChance),
-                            new ItemAffix(Affix.GoldFind, 1, 5, Affix.GoldFind),
-                            new ItemAffix(Affix.HealthRegen, 1, 5, Affix.HealthRegen),
-                            new ItemAffix(Affix.MagicFind, 1, 5, Affix.MagicFind),
-                            new ItemAffix(Affix.SpellRadius, 1, 5, Affix.SpellRadius),
+                            new ItemAffix(Affix.DodgeChance),
+                            new ItemAffix(Affix.GoldFind),
+                            new ItemAffix(Affix.HealthRegen),
+                            new ItemAffix(Affix.MagicFind),
+                            new ItemAffix(Affix.SpellRadius),
                         });
                     break;
                 case GearSlot.Belt:
                     affixes.AddRange(affixType == AffixType.Prefix
                         ? new[] {
-                            new ItemAffix(Affix.CritChance, 1, 5, Affix.CritChance),
-                            new ItemAffix(Affix.CritDamage, 1, 5, Affix.CritDamage),
-                            new ItemAffix(Affix.Dexterity, 1, 5, Affix.Dexterity),
-                            new ItemAffix(Affix.Intelligence, 1, 5, Affix.Intelligence),
-                            new ItemAffix(Affix.Strength, 1, 5, Affix.Strength),
-                            new ItemAffix(Affix.Willpower, 1, 5, Affix.Willpower),
+                            new ItemAffix(Affix.CritChance),
+                            new ItemAffix(Affix.CritDamage),
+                            new ItemAffix(Affix.Dexterity),
+                            new ItemAffix(Affix.Intelligence),
+                            new ItemAffix(Affix.Strength),
+                            new ItemAffix(Affix.Willpower),
                         }
                         : new[] {
-                            new ItemAffix(Affix.DodgeChance, 1, 5, Affix.DodgeChance),
-                            new ItemAffix(Affix.GoldFind, 1, 5, Affix.GoldFind),
-                            new ItemAffix(Affix.HealthRegen, 1, 5, Affix.HealthRegen),
-                            new ItemAffix(Affix.MagicFind, 1, 5, Affix.MagicFind),
-                            new ItemAffix(Affix.SpellRadius, 1, 5, Affix.SpellRadius),
+                            new ItemAffix(Affix.DodgeChance),
+                            new ItemAffix(Affix.GoldFind),
+                            new ItemAffix(Affix.HealthRegen),
+                            new ItemAffix(Affix.MagicFind),
+                            new ItemAffix(Affix.SpellRadius),
                         });
                     break;
                 case GearSlot.Pants:
                     affixes.AddRange(affixType == AffixType.Prefix
                         ? new[] {
-                            new ItemAffix(Affix.CritChance, 1, 5, Affix.CritChance),
-                            new ItemAffix(Affix.CritDamage, 1, 5, Affix.CritDamage),
-                            new ItemAffix(Affix.Dexterity, 1, 5, Affix.Dexterity),
-                            new ItemAffix(Affix.Intelligence, 1, 5, Affix.Intelligence),
-                            new ItemAffix(Affix.Strength, 1, 5, Affix.Strength),
-                            new ItemAffix(Affix.Willpower, 1, 5, Affix.Willpower),
+                            new ItemAffix(Affix.CritChance),
+                            new ItemAffix(Affix.CritDamage),
+                            new ItemAffix(Affix.Dexterity),
+                            new ItemAffix(Affix.Intelligence),
+                            new ItemAffix(Affix.Strength),
+                            new ItemAffix(Affix.Willpower),
                         }
                         : new[] {
-                            new ItemAffix(Affix.DodgeChance, 1, 5, Affix.DodgeChance),
-                            new ItemAffix(Affix.GoldFind, 1, 5, Affix.GoldFind),
-                            new ItemAffix(Affix.HealthRegen, 1, 5, Affix.HealthRegen),
-                            new ItemAffix(Affix.MagicFind, 1, 5, Affix.MagicFind),
-                            new ItemAffix(Affix.MovementSpeed, 1, 5, Affix.MovementSpeed),
+                            new ItemAffix(Affix.DodgeChance),
+                            new ItemAffix(Affix.GoldFind),
+                            new ItemAffix(Affix.HealthRegen),
+                            new ItemAffix(Affix.MagicFind),
+                            new ItemAffix(Affix.MovementSpeed),
                         });
                     break;
                 case GearSlot.Boots:
                     affixes.AddRange(affixType == AffixType.Prefix
                         ? new[] {
-                            new ItemAffix(Affix.AttackSpeed, 1, 5, Affix.AttackSpeed),
-                            new ItemAffix(Affix.CritChance, 1, 5, Affix.CritChance),
-                            new ItemAffix(Affix.CritDamage, 1, 5, Affix.CritDamage),
-                            new ItemAffix(Affix.Dexterity, 1, 5, Affix.Dexterity),
-                            new ItemAffix(Affix.Intelligence, 1, 5, Affix.Intelligence),
-                            new ItemAffix(Affix.Strength, 1, 5, Affix.Strength),
-                            new ItemAffix(Affix.Willpower, 1, 5, Affix.Willpower),
+                            new ItemAffix(Affix.AttackSpeed),
+                            new ItemAffix(Affix.CritChance),
+                            new ItemAffix(Affix.CritDamage),
+                            new ItemAffix(Affix.Dexterity),
+                            new ItemAffix(Affix.Intelligence),
+                            new ItemAffix(Affix.Strength),
+                            new ItemAffix(Affix.Willpower),
                         }
                         : new[] {
-                            new ItemAffix(Affix.DodgeChance, 1, 5, Affix.DodgeChance),
-                            new ItemAffix(Affix.GoldFind, 1, 5, Affix.GoldFind),
-                            new ItemAffix(Affix.HealthRegen, 1, 5, Affix.HealthRegen),
-                            new ItemAffix(Affix.MagicFind, 1, 5, Affix.MagicFind),
-                            new ItemAffix(Affix.MovementSpeed, 1, 5, Affix.MovementSpeed),
+                            new ItemAffix(Affix.DodgeChance),
+                            new ItemAffix(Affix.GoldFind),
+                            new ItemAffix(Affix.HealthRegen),
+                            new ItemAffix(Affix.MagicFind),
+                            new ItemAffix(Affix.MovementSpeed),
                         });
                     break;
                 case GearSlot.Ring:
                     affixes.AddRange(affixType == AffixType.Prefix
                         ? new[] {
-                            new ItemAffix(Affix.AttackSpeed, 1, 5, Affix.AttackSpeed),
-                            new ItemAffix(Affix.CritChance, 1, 5, Affix.CritChance),
-                            new ItemAffix(Affix.CritDamage, 1, 5, Affix.CritDamage),
-                            new ItemAffix(Affix.Dexterity, 1, 5, Affix.Dexterity),
-                            new ItemAffix(Affix.Intelligence, 1, 5, Affix.Intelligence),
-                            new ItemAffix(Affix.Strength, 1, 5, Affix.Strength),
-                            new ItemAffix(Affix.Willpower, 1, 5, Affix.Willpower),
+                            new ItemAffix(Affix.AttackSpeed),
+                            new ItemAffix(Affix.CritChance),
+                            new ItemAffix(Affix.CritDamage),
+                            new ItemAffix(Affix.Dexterity),
+                            new ItemAffix(Affix.Intelligence),
+                            new ItemAffix(Affix.Strength),
+                            new ItemAffix(Affix.Willpower),
                         }
                         : new[] {
-                            new ItemAffix(Affix.DodgeChance, 1, 5, Affix.DodgeChance),
-                            new ItemAffix(Affix.GoldFind, 1, 5, Affix.GoldFind),
-                            new ItemAffix(Affix.HealthRegen, 1, 5, Affix.HealthRegen),
-                            new ItemAffix(Affix.MagicFind, 1, 5, Affix.MagicFind),
-                            new ItemAffix(Affix.MovementSpeed, 1, 5, Affix.MovementSpeed),
-                            new ItemAffix(Affix.SpellRadius, 1, 5, Affix.SpellRadius),
+                            new ItemAffix(Affix.DodgeChance),
+                            new ItemAffix(Affix.GoldFind),
+                            new ItemAffix(Affix.HealthRegen),
+                            new ItemAffix(Affix.MagicFind),
+                            new ItemAffix(Affix.MovementSpeed),
+                            new ItemAffix(Affix.SpellRadius),
                         });
                     break;
                 case GearSlot.Amulet:
                     affixes.AddRange(affixType == AffixType.Prefix
                         ? new[] {
-                            new ItemAffix(Affix.AttackSpeed, 1, 5, Affix.AttackSpeed),
-                            new ItemAffix(Affix.CritChance, 1, 5, Affix.CritChance),
-                            new ItemAffix(Affix.CritDamage, 1, 5, Affix.CritDamage),
-                            new ItemAffix(Affix.Dexterity, 1, 5, Affix.Dexterity),
-                            new ItemAffix(Affix.Intelligence, 1, 5, Affix.Intelligence),
-                            new ItemAffix(Affix.Projectiles, 1, 5, Affix.Projectiles),
-                            new ItemAffix(Affix.Strength, 1, 5, Affix.Strength),
-                            new ItemAffix(Affix.Willpower, 1, 5, Affix.Willpower),
+                            new ItemAffix(Affix.AttackSpeed),
+                            new ItemAffix(Affix.CritChance),
+                            new ItemAffix(Affix.CritDamage),
+                            new ItemAffix(Affix.Dexterity),
+                            new ItemAffix(Affix.Intelligence),
+                            new ItemAffix(Affix.Projectiles),
+                            new ItemAffix(Affix.Strength),
+                            new ItemAffix(Affix.Willpower),
                         }
                         : new[] {
-                            new ItemAffix(Affix.DodgeChance, 1, 5, Affix.DodgeChance),
-                            new ItemAffix(Affix.GoldFind, 1, 5, Affix.GoldFind),
-                            new ItemAffix(Affix.HealthRegen, 1, 5, Affix.HealthRegen),
-                            new ItemAffix(Affix.MagicFind, 1, 5, Affix.MagicFind),
-                            new ItemAffix(Affix.MovementSpeed, 1, 5, Affix.MovementSpeed),
-                            new ItemAffix(Affix.SpellRadius, 1, 5, Affix.SpellRadius),
+                            new ItemAffix(Affix.DodgeChance),
+                            new ItemAffix(Affix.GoldFind),
+                            new ItemAffix(Affix.HealthRegen),
+                            new ItemAffix(Affix.MagicFind),
+                            new ItemAffix(Affix.MovementSpeed),
+                            new ItemAffix(Affix.SpellRadius),
                         });
                     break;
                 case GearSlot.MainHand:
                     affixes.AddRange(affixType == AffixType.Prefix
                         ? new[] {
-                            new ItemAffix(Affix.AttackSpeed, 1, 5, Affix.AttackSpeed),
-                            new ItemAffix(Affix.CritChance, 1, 5, Affix.CritChance),
-                            new ItemAffix(Affix.CritDamage, 1, 5, Affix.CritDamage),
-                            new ItemAffix(Affix.Dexterity, 1, 5, Affix.Dexterity),
-                            new ItemAffix(Affix.Intelligence, 1, 5, Affix.Intelligence),
-                            new ItemAffix(Affix.Projectiles, 1, 5, Affix.Projectiles),
-                            new ItemAffix(Affix.Strength, 1, 5, Affix.Strength),
-                            new ItemAffix(Affix.Willpower, 1, 5, Affix.Willpower),
+                            new ItemAffix(Affix.AttackSpeed),
+                            new ItemAffix(Affix.CritChance),
+                            new ItemAffix(Affix.CritDamage),
+                            new ItemAffix(Affix.Dexterity),
+                            new ItemAffix(Affix.Intelligence),
+                            new ItemAffix(Affix.Projectiles),
+                            new ItemAffix(Affix.Strength),
+                            new ItemAffix(Affix.Willpower),
                         }
                         : new[] {
-                            new ItemAffix(Affix.DodgeChance, 1, 5, Affix.DodgeChance),
-                            new ItemAffix(Affix.GoldFind, 1, 5, Affix.GoldFind),
-                            new ItemAffix(Affix.HealthRegen, 1, 5, Affix.HealthRegen),
-                            new ItemAffix(Affix.MagicFind, 1, 5, Affix.MagicFind),
-                            new ItemAffix(Affix.SpellRadius, 1, 5, Affix.SpellRadius),
+                            new ItemAffix(Affix.DodgeChance),
+                            new ItemAffix(Affix.GoldFind),
+                            new ItemAffix(Affix.HealthRegen),
+                            new ItemAffix(Affix.MagicFind),
+                            new ItemAffix(Affix.SpellRadius),
                         });
                     break;
                 case GearSlot.OffHand:
                     affixes.AddRange(affixType == AffixType.Prefix
                         ? new[] {
-                            new ItemAffix(Affix.AttackSpeed, 1, 5, Affix.AttackSpeed),
-                            new ItemAffix(Affix.CritChance, 1, 5, Affix.CritChance),
-                            new ItemAffix(Affix.CritDamage, 1, 5, Affix.CritDamage),
-                            new ItemAffix(Affix.Dexterity, 1, 5, Affix.Dexterity),
-                            new ItemAffix(Affix.Intelligence, 1, 5, Affix.Intelligence),
-                            new ItemAffix(Affix.Projectiles, 1, 5, Affix.Projectiles),
-                            new ItemAffix(Affix.Strength, 1, 5, Affix.Strength),
-                            new ItemAffix(Affix.Willpower, 1, 5, Affix.Willpower),
+                            new ItemAffix(Affix.AttackSpeed),
+                            new ItemAffix(Affix.CritChance),
+                            new ItemAffix(Affix.CritDamage),
+                            new ItemAffix(Affix.Dexterity),
+                            new ItemAffix(Affix.Intelligence),
+                            new ItemAffix(Affix.Projectiles),
+                            new ItemAffix(Affix.Strength),
+                            new ItemAffix(Affix.Willpower),
                         }
                         : new[] {
-                            new ItemAffix(Affix.DodgeChance, 1, 5, Affix.DodgeChance),
-                            new ItemAffix(Affix.GoldFind, 1, 5, Affix.GoldFind),
-                            new ItemAffix(Affix.HealthRegen, 1, 5, Affix.HealthRegen),
-                            new ItemAffix(Affix.MagicFind, 1, 5, Affix.MagicFind),
-                            new ItemAffix(Affix.SpellRadius, 1, 5, Affix.SpellRadius),
+                            new ItemAffix(Affix.DodgeChance),
+                            new ItemAffix(Affix.GoldFind),
+                            new ItemAffix(Affix.HealthRegen),
+                            new ItemAffix(Affix.MagicFind),
+                            new ItemAffix(Affix.SpellRadius),
                         });
                     break;
                 default:
@@ -261,70 +285,83 @@ namespace Crafting_System
 
             return affixes;
         }
-        public int RollBaseStat(int level)
+        public AffixValue RollBaseStat(int level)
         {
-            int value = level switch
+            AffixValue value = level switch
             {
-                int i when i < 10 => random.Next(1, 6),
-                int i when i >= 10 && i < 20 => random.Next(4, 11),
-                int i when i >= 20 && i < 30 => random.Next(7, 16),
-                int i when i >= 30 && i < 40 => random.Next(10, 21),
-                int i when i >= 40 && i < 50 => random.Next(13, 26),
-                int i when i >= 50 && i < 60 => random.Next(16, 31),
-                int i when i >= 60 && i < 70 => random.Next(19, 36),
-                int i when i >= 70 => random.Next(22, 41),
-                _ => random.Next(1, 41)
+                int i when i < 10 => new AffixValue { MinValue = 1, MaxValue = 6, Value = random.Next(1, 6) },
+                int i when i >= 10 && i < 20 => new AffixValue { MinValue = 4, MaxValue = 11, Value = random.Next(4, 11) },
+                int i when i >= 20 && i < 30 => new AffixValue { MinValue = 7, MaxValue = 16, Value = random.Next(7, 16) },
+                int i when i >= 30 && i < 40 => new AffixValue { MinValue = 10, MaxValue = 21, Value = random.Next(10, 21) },
+                int i when i >= 40 && i < 50 => new AffixValue { MinValue = 13, MaxValue = 26, Value = random.Next(13, 26) },
+                int i when i >= 50 && i < 60 => new AffixValue { MinValue = 16, MaxValue = 31, Value = random.Next(16, 31) },
+                int i when i >= 60 && i < 70 => new AffixValue { MinValue = 19, MaxValue = 36, Value = random.Next(19, 36) },
+                int i when i >= 70 => new AffixValue { MinValue = 22, MaxValue = 41, Value = random.Next(22, 41) },
+                _ => new AffixValue { MinValue = 1, MaxValue = 6, Value = random.Next(1, 6) }
             };
             return value;
         }
-        public int RollArmor(int level)
+        public AffixValue RollArmor(int level)
         {
-            int value = level switch
+            AffixValue value = level switch
             {
-                int i when i < 10 => random.Next(4, 12),
-                int i when i >= 10 && i < 20 => random.Next(8, 18),
-                int i when i >= 20 && i < 30 => random.Next(12, 24),
-                int i when i >= 30 && i < 40 => random.Next(16, 30),
-                int i when i >= 40 && i < 50 => random.Next(20, 36),
-                int i when i >= 50 && i < 60 => random.Next(24, 42),
-                int i when i >= 60 && i < 70 => random.Next(28, 48),
-                int i when i >= 70 => random.Next(32, 54),
-                _ => random.Next(4, 54)
+                int i when i < 10 => new AffixValue { MinValue = 4, MaxValue = 12, Value = random.Next(4, 12) },
+                int i when i >= 10 && i < 20 => new AffixValue { MinValue = 8, MaxValue = 18, Value = random.Next(8, 18) },
+                int i when i >= 20 && i < 30 => new AffixValue { MinValue = 12, MaxValue = 24, Value = random.Next(12, 24) },
+                int i when i >= 30 && i < 40 => new AffixValue { MinValue = 16, MaxValue = 30, Value = random.Next(16, 30) },
+                int i when i >= 40 && i < 50 => new AffixValue { MinValue = 20, MaxValue = 36, Value = random.Next(20, 36) },
+                int i when i >= 50 && i < 60 => new AffixValue { MinValue = 24, MaxValue = 42, Value = random.Next(24, 42) },
+                int i when i >= 60 && i < 70 => new AffixValue { MinValue = 28, MaxValue = 48, Value = random.Next(28, 48) },
+                int i when i >= 70 => new AffixValue { MinValue =32, MaxValue = 54, Value = random.Next(32, 54) },
+                _ => new AffixValue { MinValue = 4, MaxValue = 12, Value = random.Next(4, 12) }
             };
             return value;
         }
-        public int RollLowPercentageIncrease(int level)
+        public AffixValue RollLowPercentageIncrease(int level)
         {
-            int value = level switch
+            AffixValue value = level switch
             {
-                int i when i < 10 => random.Next(1, 2),
-                int i when i >= 10 && i < 20 => random.Next(1, 3),
-                int i when i >= 20 && i < 30 => random.Next(2, 4),
-                int i when i >= 30 && i < 40 => random.Next(2, 5),
-                int i when i >= 40 && i < 50 => random.Next(3, 6),
-                int i when i >= 50 && i < 60 => random.Next(3, 7),
-                int i when i >= 60 && i < 70 => random.Next(4, 8),
-                int i when i >= 70 => random.Next(4, 9),
-                _ => random.Next(1, 9)
+                int i when i < 10 => new AffixValue { MinValue = 1, MaxValue = 2, Value = random.Next(1, 2) },
+                int i when i >= 10 && i < 20 => new AffixValue { MinValue = 1, MaxValue = 3, Value = random.Next(1, 3) },
+                int i when i >= 20 && i < 30 => new AffixValue { MinValue = 2, MaxValue = 4, Value = random.Next(2, 4) },
+                int i when i >= 30 && i < 40 => new AffixValue { MinValue = 2, MaxValue = 5, Value = random.Next(2, 5) },
+                int i when i >= 40 && i < 50 => new AffixValue { MinValue = 3, MaxValue = 6, Value = random.Next(3, 6) },
+                int i when i >= 50 && i < 60 => new AffixValue { MinValue = 4, MaxValue = 7, Value = random.Next(4, 7) },
+                int i when i >= 60 && i < 70 => new AffixValue { MinValue = 4, MaxValue = 8, Value = random.Next(4, 8) },
+                int i when i >= 70 => new AffixValue { MinValue = 5, MaxValue = 9, Value = random.Next(5, 9) },
+                _ => new AffixValue { MinValue = 1, MaxValue = 2, Value = random.Next(1, 2) }
             };
             return value;
         }
-        public int RollHighPercentageIncrease(int level)
+        public AffixValue RollHighPercentageIncrease(int level)
         {
-            int value = level switch
+            AffixValue value = level switch
             {
-                int i when i < 10 => random.Next(1, 4),
-                int i when i >= 10 && i < 20 => random.Next(3, 7),
-                int i when i >= 20 && i < 30 => random.Next(5, 10),
-                int i when i >= 30 && i < 40 => random.Next(7, 13),
-                int i when i >= 40 && i < 50 => random.Next(9, 16),
-                int i when i >= 50 && i < 60 => random.Next(11, 19),
-                int i when i >= 60 && i < 70 => random.Next(13, 22),
-                int i when i >= 70 => random.Next(13, 25),
-                _ => random.Next(1, 25)
+                int i when i < 10 => new AffixValue { MinValue = 1, MaxValue = 4, Value = random.Next(1, 4) },
+                int i when i >= 10 && i < 20 => new AffixValue { MinValue = 3, MaxValue = 7, Value = random.Next(3, 7) },
+                int i when i >= 20 && i < 30 => new AffixValue { MinValue = 5, MaxValue = 10, Value = random.Next(5, 10) },
+                int i when i >= 30 && i < 40 => new AffixValue { MinValue = 7, MaxValue = 13, Value = random.Next(7, 13) },
+                int i when i >= 40 && i < 50 => new AffixValue { MinValue = 9, MaxValue = 16, Value = random.Next(9, 16) },
+                int i when i >= 50 && i < 60 => new AffixValue { MinValue = 11, MaxValue = 19, Value = random.Next(11, 19) },
+                int i when i >= 60 && i < 70 => new AffixValue { MinValue = 13, MaxValue = 22, Value = random.Next(13, 22) },
+                int i when i >= 70 => new AffixValue { MinValue = 13, MaxValue = 25, Value = random.Next(13, 25) },
+                _ => new AffixValue { MinValue = 1, MaxValue = 4, Value = random.Next(1, 4) }
             };
             return value;
         }
+        public AffixValue RollSkillOrProjectileIncrease(int level)
+        {
+            AffixValue value = level switch
+            {
+                int i when i < 30 => new AffixValue { MinValue = 1, MaxValue = 1, Value = 1 },
+                int i when i >= 30 && i < 50 => new AffixValue { MinValue = 1, MaxValue = 2, Value = random.Next(1, 2) },
+                int i when i >= 50 && i < 70 => new AffixValue { MinValue = 1, MaxValue = 3, Value = random.Next(1, 3) },
+                int i when i >= 70 => new AffixValue { MinValue = 2, MaxValue = 4, Value = random.Next(2, 4) },
+                _ => new AffixValue { MinValue = 1, MaxValue = 1, Value = 1 }
+            };
+            return value;
+        }
+
         public EquipmentItem CreateEquipmentItem(int level, GearSlot slot)
         {
             EquipmentItem item = new EquipmentItem();
@@ -348,14 +385,29 @@ namespace Crafting_System
                     break;
                 }
 
-                if (canAddPrefix && (!canAddSuffix || random.Next(0, 2) == 0))
+                if (canAddPrefix && random.Next(0, 2) == 0)
                 {
-                    item.AddAffix(prefixes[random.Next(0, prefixes.Count)], AffixType.Prefix);
+                    ItemAffix affix = CreateAffix(prefixes);
+                    while(item.Prefixes.Contains(affix))
+                    {
+                        affix = CreateAffix(prefixes);
+                    }
+
+                    affix.Values = GetAffixValue(affix.Affix, level);
+                    item.AddAffix(affix, AffixType.Prefix);
+
                     remainingAffixes--;
                 }
                 else if (canAddSuffix)
                 {
-                    item.AddAffix(suffixes[random.Next(0, suffixes.Count)], AffixType.Suffix);
+                    ItemAffix affix = CreateAffix(suffixes);
+                    while (item.Suffixes.Contains(affix))
+                    {
+                        affix = CreateAffix(suffixes);
+                    }
+                    affix.Values = GetAffixValue(affix.Affix, level);
+
+                    item.AddAffix(affix, AffixType.Suffix);
                     remainingAffixes--;
                 }
             }
@@ -363,6 +415,11 @@ namespace Crafting_System
             // Calculate and apply the stat modifiers based on the affixes
 
             return item;
+        }
+
+        private ItemAffix CreateAffix(List<ItemAffix> affixes)
+        {
+            return affixes[random.Next(0, affixes.Count)];
         }
         private void ShuffleList<T>(List<T> list)
         {
@@ -399,5 +456,5 @@ namespace Crafting_System
         }
     }
 
-    
+
 }
