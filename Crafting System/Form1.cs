@@ -1,3 +1,6 @@
+using System.ComponentModel.DataAnnotations;
+using System.Reflection;
+
 namespace Crafting_System
 {
     public partial class Form1 : Form
@@ -68,19 +71,19 @@ namespace Crafting_System
                     lblItem1_prefix_3.Text = "";
                     break;
                 case 1:
-                    lblItem1_prefix_1.Text = $"{equipmentItem.Prefixes[0].Affix.ToString()} - {equipmentItem.Prefixes[0].Values.Value} ( {equipmentItem.Prefixes[0].Values.MinValue} - {equipmentItem.Prefixes[0].Values.MaxValue} )";
+                    lblItem1_prefix_1.Text = $"{equipmentItem.Prefixes[0].Affix.GetDisplayName()} - {equipmentItem.Prefixes[0].Values.Value} ( {equipmentItem.Prefixes[0].Values.MinValue} - {equipmentItem.Prefixes[0].Values.MaxValue} )";
                     lblItem1_prefix_2.Text = "";
                     lblItem1_prefix_3.Text = "";
                     break;
                 case 2:
-                    lblItem1_prefix_1.Text = $"{equipmentItem.Prefixes[0].Affix.ToString()} - {equipmentItem.Prefixes[0].Values.Value} ( {equipmentItem.Prefixes[0].Values.MinValue} - {equipmentItem.Prefixes[0].Values.MaxValue} )";
-                    lblItem1_prefix_2.Text = $"{equipmentItem.Prefixes[1].Affix.ToString()} - {equipmentItem.Prefixes[1].Values.Value} ( {equipmentItem.Prefixes[1].Values.MinValue} - {equipmentItem.Prefixes[1].Values.MaxValue} )";
+                    lblItem1_prefix_1.Text = $"{equipmentItem.Prefixes[0].Affix.GetDisplayName()} - {equipmentItem.Prefixes[0].Values.Value} ( {equipmentItem.Prefixes[0].Values.MinValue} - {equipmentItem.Prefixes[0].Values.MaxValue} )";
+                    lblItem1_prefix_2.Text = $"{equipmentItem.Prefixes[1].Affix.GetDisplayName()} - {equipmentItem.Prefixes[1].Values.Value} ( {equipmentItem.Prefixes[1].Values.MinValue} - {equipmentItem.Prefixes[1].Values.MaxValue} )";
                     lblItem1_prefix_3.Text = "";
                     break;
                 case 3:
-                    lblItem1_prefix_1.Text = $"{equipmentItem.Prefixes[0].Affix.ToString()} - {equipmentItem.Prefixes[0].Values.Value} ( {equipmentItem.Prefixes[0].Values.MinValue} - {equipmentItem.Prefixes[0].Values.MaxValue} )";
-                    lblItem1_prefix_2.Text = $"{equipmentItem.Prefixes[1].Affix.ToString()} - {equipmentItem.Prefixes[1].Values.Value} ( {equipmentItem.Prefixes[1].Values.MinValue} - {equipmentItem.Prefixes[1].Values.MaxValue} )";
-                    lblItem1_prefix_3.Text = $"{equipmentItem.Prefixes[2].Affix.ToString()} - {equipmentItem.Prefixes[2].Values.Value} ( {equipmentItem.Prefixes[2].Values.MinValue} - {equipmentItem.Prefixes[2].Values.MaxValue} )";
+                    lblItem1_prefix_1.Text = $"{equipmentItem.Prefixes[0].Affix.GetDisplayName()} - {equipmentItem.Prefixes[0].Values.Value} ( {equipmentItem.Prefixes[0].Values.MinValue} - {equipmentItem.Prefixes[0].Values.MaxValue} )";
+                    lblItem1_prefix_2.Text = $"{equipmentItem.Prefixes[1].Affix.GetDisplayName()} - {equipmentItem.Prefixes[1].Values.Value} ( {equipmentItem.Prefixes[1].Values.MinValue} - {equipmentItem.Prefixes[1].Values.MaxValue} )";
+                    lblItem1_prefix_3.Text = $"{equipmentItem.Prefixes[2].Affix.GetDisplayName()} - {equipmentItem.Prefixes[2].Values.Value} ( {equipmentItem.Prefixes[2].Values.MinValue} - {equipmentItem.Prefixes[2].Values.MaxValue} )";
                     break;
             }
             switch (equipmentItem.Suffixes.Count)
@@ -91,19 +94,19 @@ namespace Crafting_System
                     lblItem1_suffix_3.Text = "";
                     break; 
                 case 1:    
-                    lblItem1_suffix_1.Text = $"{equipmentItem.Suffixes[0].Affix.ToString()} - {equipmentItem.Suffixes[0].Values.Value} ( {equipmentItem.Suffixes[0].Values.MinValue} - {equipmentItem.Suffixes[0].Values.MaxValue} )";
+                    lblItem1_suffix_1.Text = $"{equipmentItem.Suffixes[0].Affix.GetDisplayName()} - {equipmentItem.Suffixes[0].Values.Value} ( {equipmentItem.Suffixes[0].Values.MinValue} - {equipmentItem.Suffixes[0].Values.MaxValue} )";
                     lblItem1_suffix_2.Text = "";
                     lblItem1_suffix_3.Text = "";
                     break; 
                 case 2:    
-                    lblItem1_suffix_1.Text = $"{equipmentItem.Suffixes[0].Affix.ToString()} - {equipmentItem.Suffixes[0].Values.Value} ( {equipmentItem.Suffixes[0].Values.MinValue} - {equipmentItem.Suffixes[0].Values.MaxValue} )";
-                    lblItem1_suffix_2.Text = $"{equipmentItem.Suffixes[1].Affix.ToString()} - {equipmentItem.Suffixes[1].Values.Value} ( {equipmentItem.Suffixes[1].Values.MinValue} - {equipmentItem.Suffixes[1].Values.MaxValue} )";
+                    lblItem1_suffix_1.Text = $"{equipmentItem.Suffixes[0].Affix.GetDisplayName()} - {equipmentItem.Suffixes[0].Values.Value} ( {equipmentItem.Suffixes[0].Values.MinValue} - {equipmentItem.Suffixes[0].Values.MaxValue} )";
+                    lblItem1_suffix_2.Text = $"{equipmentItem.Suffixes[1].Affix.GetDisplayName()} - {equipmentItem.Suffixes[1].Values.Value} ( {equipmentItem.Suffixes[1].Values.MinValue} - {equipmentItem.Suffixes[1].Values.MaxValue} )";
                     lblItem1_suffix_3.Text = "";
                     break; 
                 case 3:    
-                    lblItem1_suffix_1.Text = $"{equipmentItem.Suffixes[0].Affix.ToString()} - {equipmentItem.Suffixes[0].Values.Value} ( {equipmentItem.Suffixes[0].Values.MinValue} - {equipmentItem.Suffixes[0].Values.MaxValue} )";
-                    lblItem1_suffix_2.Text = $"{equipmentItem.Suffixes[1].Affix.ToString()} - {equipmentItem.Suffixes[1].Values.Value} ( {equipmentItem.Suffixes[1].Values.MinValue} - {equipmentItem.Suffixes[1].Values.MaxValue} )";
-                    lblItem1_suffix_3.Text = $"{equipmentItem.Suffixes[2].Affix.ToString()} - {equipmentItem.Suffixes[2].Values.Value} ( {equipmentItem.Suffixes[2].Values.MinValue} - {equipmentItem.Suffixes[2].Values.MaxValue} )";
+                    lblItem1_suffix_1.Text = $"{equipmentItem.Suffixes[0].Affix.GetDisplayName()} - {equipmentItem.Suffixes[0].Values.Value} ( {equipmentItem.Suffixes[0].Values.MinValue} - {equipmentItem.Suffixes[0].Values.MaxValue} )";
+                    lblItem1_suffix_2.Text = $"{equipmentItem.Suffixes[1].Affix.GetDisplayName()} - {equipmentItem.Suffixes[1].Values.Value} ( {equipmentItem.Suffixes[1].Values.MinValue} - {equipmentItem.Suffixes[1].Values.MaxValue} )";
+                    lblItem1_suffix_3.Text = $"{equipmentItem.Suffixes[2].Affix.GetDisplayName()} - {equipmentItem.Suffixes[2].Values.Value} ( {equipmentItem.Suffixes[2].Values.MinValue} - {equipmentItem.Suffixes[2].Values.MaxValue} )";
                     break;
             }
         }
@@ -120,19 +123,19 @@ namespace Crafting_System
                     lblItem2_prefix_3.Text = "";
                     break;
                 case 1:
-                    lblItem2_prefix_1.Text = $"{equipmentItem.Prefixes[0].Affix.ToString()} - {equipmentItem.Prefixes[0].Values.Value} ( {equipmentItem.Prefixes[0].Values.MinValue} - {equipmentItem.Prefixes[0].Values.MaxValue} )";
+                    lblItem2_prefix_1.Text = $"{equipmentItem.Prefixes[0].Affix.GetDisplayName()} - {equipmentItem.Prefixes[0].Values.Value} ( {equipmentItem.Prefixes[0].Values.MinValue} - {equipmentItem.Prefixes[0].Values.MaxValue} )";
                     lblItem2_prefix_2.Text = "";
                     lblItem2_prefix_3.Text = "";
                     break;
                 case 2:
-                    lblItem2_prefix_1.Text = $"{equipmentItem.Prefixes[0].Affix.ToString()} - {equipmentItem.Prefixes[0].Values.Value} ( {equipmentItem.Prefixes[0].Values.MinValue} - {equipmentItem.Prefixes[0].Values.MaxValue} )";
-                    lblItem2_prefix_2.Text = $"{equipmentItem.Prefixes[1].Affix.ToString()} - {equipmentItem.Prefixes[1].Values.Value} ( {equipmentItem.Prefixes[1].Values.MinValue} - {equipmentItem.Prefixes[1].Values.MaxValue} )";
+                    lblItem2_prefix_1.Text = $"{equipmentItem.Prefixes[0].Affix.GetDisplayName()} - {equipmentItem.Prefixes[0].Values.Value} ( {equipmentItem.Prefixes[0].Values.MinValue} - {equipmentItem.Prefixes[0].Values.MaxValue} )";
+                    lblItem2_prefix_2.Text = $"{equipmentItem.Prefixes[1].Affix.GetDisplayName()} - {equipmentItem.Prefixes[1].Values.Value} ( {equipmentItem.Prefixes[1].Values.MinValue} - {equipmentItem.Prefixes[1].Values.MaxValue} )";
                     lblItem2_prefix_3.Text = "";
                     break;
                 case 3:
-                    lblItem2_prefix_1.Text = $"{equipmentItem.Prefixes[0].Affix.ToString()} - {equipmentItem.Prefixes[0].Values.Value} ( {equipmentItem.Prefixes[0].Values.MinValue} - {equipmentItem.Prefixes[0].Values.MaxValue} )";
-                    lblItem2_prefix_2.Text = $"{equipmentItem.Prefixes[1].Affix.ToString()} - {equipmentItem.Prefixes[1].Values.Value} ( {equipmentItem.Prefixes[1].Values.MinValue} - {equipmentItem.Prefixes[1].Values.MaxValue} )";
-                    lblItem2_prefix_3.Text = $"{equipmentItem.Prefixes[2].Affix.ToString()} - {equipmentItem.Prefixes[2].Values.Value} ( {equipmentItem.Prefixes[2].Values.MinValue} - {equipmentItem.Prefixes[2].Values.MaxValue} )";
+                    lblItem2_prefix_1.Text = $"{equipmentItem.Prefixes[0].Affix.GetDisplayName()} - {equipmentItem.Prefixes[0].Values.Value} ( {equipmentItem.Prefixes[0].Values.MinValue} - {equipmentItem.Prefixes[0].Values.MaxValue} )";
+                    lblItem2_prefix_2.Text = $"{equipmentItem.Prefixes[1].Affix.GetDisplayName()} - {equipmentItem.Prefixes[1].Values.Value} ( {equipmentItem.Prefixes[1].Values.MinValue} - {equipmentItem.Prefixes[1].Values.MaxValue} )";
+                    lblItem2_prefix_3.Text = $"{equipmentItem.Prefixes[2].Affix.GetDisplayName()} - {equipmentItem.Prefixes[2].Values.Value} ( {equipmentItem.Prefixes[2].Values.MinValue} - {equipmentItem.Prefixes[2].Values.MaxValue} )";
                     break;
             }
             switch (equipmentItem.Suffixes.Count)
@@ -143,19 +146,19 @@ namespace Crafting_System
                     lblItem2_suffix_3.Text = "";
                     break;
                 case 1:
-                    lblItem2_suffix_1.Text = $"{equipmentItem.Suffixes[0].Affix.ToString()} - {equipmentItem.Suffixes[0].Values.Value} ( {equipmentItem.Suffixes[0].Values.MinValue} - {equipmentItem.Suffixes[0].Values.MaxValue} )";
+                    lblItem2_suffix_1.Text = $"{equipmentItem.Suffixes[0].Affix.GetDisplayName()} - {equipmentItem.Suffixes[0].Values.Value} ( {equipmentItem.Suffixes[0].Values.MinValue} - {equipmentItem.Suffixes[0].Values.MaxValue} )";
                     lblItem2_suffix_2.Text = "";
                     lblItem2_suffix_3.Text = "";
                     break;
                 case 2:
-                    lblItem2_suffix_1.Text = $"{equipmentItem.Suffixes[0].Affix.ToString()} - {equipmentItem.Suffixes[0].Values.Value} ( {equipmentItem.Suffixes[0].Values.MinValue} - {equipmentItem.Suffixes[0].Values.MaxValue} )";
-                    lblItem2_suffix_2.Text = $"{equipmentItem.Suffixes[1].Affix.ToString()} - {equipmentItem.Suffixes[1].Values.Value} ( {equipmentItem.Suffixes[1].Values.MinValue} - {equipmentItem.Suffixes[1].Values.MaxValue} )";
+                    lblItem2_suffix_1.Text = $"{equipmentItem.Suffixes[0].Affix.GetDisplayName()} - {equipmentItem.Suffixes[0].Values.Value} ( {equipmentItem.Suffixes[0].Values.MinValue} - {equipmentItem.Suffixes[0].Values.MaxValue} )";
+                    lblItem2_suffix_2.Text = $"{equipmentItem.Suffixes[1].Affix.GetDisplayName()} - {equipmentItem.Suffixes[1].Values.Value} ( {equipmentItem.Suffixes[1].Values.MinValue} - {equipmentItem.Suffixes[1].Values.MaxValue} )";
                     lblItem2_suffix_3.Text = "";
                     break;
                 case 3:
-                    lblItem2_suffix_1.Text = $"{equipmentItem.Suffixes[0].Affix.ToString()} - {equipmentItem.Suffixes[0].Values.Value} ( {equipmentItem.Suffixes[0].Values.MinValue} - {equipmentItem.Suffixes[0].Values.MaxValue} )";
-                    lblItem2_suffix_2.Text = $"{equipmentItem.Suffixes[1].Affix.ToString()} - {equipmentItem.Suffixes[1].Values.Value} ( {equipmentItem.Suffixes[1].Values.MinValue} - {equipmentItem.Suffixes[1].Values.MaxValue} )";
-                    lblItem2_suffix_3.Text = $"{equipmentItem.Suffixes[2].Affix.ToString()} - {equipmentItem.Suffixes[2].Values.Value} ( {equipmentItem.Suffixes[2].Values.MinValue} - {equipmentItem.Suffixes[2].Values.MaxValue} )";
+                    lblItem2_suffix_1.Text = $"{equipmentItem.Suffixes[0].Affix.GetDisplayName()} - {equipmentItem.Suffixes[0].Values.Value} ( {equipmentItem.Suffixes[0].Values.MinValue} - {equipmentItem.Suffixes[0].Values.MaxValue} )";
+                    lblItem2_suffix_2.Text = $"{equipmentItem.Suffixes[1].Affix.GetDisplayName()} - {equipmentItem.Suffixes[1].Values.Value} ( {equipmentItem.Suffixes[1].Values.MinValue} - {equipmentItem.Suffixes[1].Values.MaxValue} )";
+                    lblItem2_suffix_3.Text = $"{equipmentItem.Suffixes[2].Affix.GetDisplayName()} - {equipmentItem.Suffixes[2].Values.Value} ( {equipmentItem.Suffixes[2].Values.MinValue} - {equipmentItem.Suffixes[2].Values.MaxValue} )";
                     break;
             }
         }
