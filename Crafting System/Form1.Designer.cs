@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            lblItem1_Armor_Damage = new Label();
+            lblItem1_baseAffix_2 = new Label();
+            lblItem1_baseAffix_1 = new Label();
             lblItem1_suffix_3 = new Label();
             lblItem1_suffix_2 = new Label();
             lblItem1_suffix_1 = new Label();
@@ -37,21 +40,16 @@
             lblItem1_prefix_1 = new Label();
             lblItem1 = new Label();
             panel2 = new Panel();
+            lblItem2_Armor_Damage = new Label();
+            lblItem2_baseAffix_2 = new Label();
             lblItem2_suffix_3 = new Label();
+            lblItem2_baseAffix_1 = new Label();
             lblItem2_suffix_2 = new Label();
             lblItem2_suffix_1 = new Label();
             lblItem2_prefix_3 = new Label();
             lblItem2_prefix_2 = new Label();
             lblItem2_prefix_1 = new Label();
             lblItem2 = new Label();
-            panel3 = new Panel();
-            lblItem3_suffix_3 = new Label();
-            lblItem3_suffix_2 = new Label();
-            lblItem3_suffix_1 = new Label();
-            lblItem3_prefix_3 = new Label();
-            lblItem3_prefix_2 = new Label();
-            lblItem3_prefix_1 = new Label();
-            lblItem3 = new Label();
             btnCreate_Item_1 = new Button();
             btnCreate_Item_2 = new Button();
             btn_Create_Inventory = new Button();
@@ -61,13 +59,18 @@
             lstInventory = new ListBox();
             txtLevel = new TextBox();
             label2 = new Label();
+            lblItem1_Level = new Label();
+            lblItem2_Level = new Label();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
-            panel3.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
+            panel1.Controls.Add(lblItem1_Level);
+            panel1.Controls.Add(lblItem1_Armor_Damage);
+            panel1.Controls.Add(lblItem1_baseAffix_2);
+            panel1.Controls.Add(lblItem1_baseAffix_1);
             panel1.Controls.Add(lblItem1_suffix_3);
             panel1.Controls.Add(lblItem1_suffix_2);
             panel1.Controls.Add(lblItem1_suffix_1);
@@ -77,13 +80,41 @@
             panel1.Controls.Add(lblItem1);
             panel1.Location = new Point(29, 22);
             panel1.Name = "panel1";
-            panel1.Size = new Size(338, 294);
+            panel1.Size = new Size(338, 492);
             panel1.TabIndex = 0;
+            panel1.Paint += panel1_Paint;
+            // 
+            // lblItem1_Armor_Damage
+            // 
+            lblItem1_Armor_Damage.AutoSize = true;
+            lblItem1_Armor_Damage.Location = new Point(24, 62);
+            lblItem1_Armor_Damage.Name = "lblItem1_Armor_Damage";
+            lblItem1_Armor_Damage.Size = new Size(0, 25);
+            lblItem1_Armor_Damage.TabIndex = 9;
+            lblItem1_Armor_Damage.Click += label3_Click;
+            // 
+            // lblItem1_baseAffix_2
+            // 
+            lblItem1_baseAffix_2.AutoSize = true;
+            lblItem1_baseAffix_2.Location = new Point(24, 138);
+            lblItem1_baseAffix_2.Name = "lblItem1_baseAffix_2";
+            lblItem1_baseAffix_2.Size = new Size(36, 25);
+            lblItem1_baseAffix_2.TabIndex = 8;
+            lblItem1_baseAffix_2.Text = "sss";
+            // 
+            // lblItem1_baseAffix_1
+            // 
+            lblItem1_baseAffix_1.AutoSize = true;
+            lblItem1_baseAffix_1.Location = new Point(24, 105);
+            lblItem1_baseAffix_1.Name = "lblItem1_baseAffix_1";
+            lblItem1_baseAffix_1.Size = new Size(36, 25);
+            lblItem1_baseAffix_1.TabIndex = 7;
+            lblItem1_baseAffix_1.Text = "sss";
             // 
             // lblItem1_suffix_3
             // 
             lblItem1_suffix_3.AutoSize = true;
-            lblItem1_suffix_3.Location = new Point(24, 247);
+            lblItem1_suffix_3.Location = new Point(24, 389);
             lblItem1_suffix_3.Name = "lblItem1_suffix_3";
             lblItem1_suffix_3.Size = new Size(71, 25);
             lblItem1_suffix_3.TabIndex = 6;
@@ -92,7 +123,7 @@
             // lblItem1_suffix_2
             // 
             lblItem1_suffix_2.AutoSize = true;
-            lblItem1_suffix_2.Location = new Point(24, 212);
+            lblItem1_suffix_2.Location = new Point(24, 354);
             lblItem1_suffix_2.Name = "lblItem1_suffix_2";
             lblItem1_suffix_2.Size = new Size(71, 25);
             lblItem1_suffix_2.TabIndex = 5;
@@ -101,7 +132,7 @@
             // lblItem1_suffix_1
             // 
             lblItem1_suffix_1.AutoSize = true;
-            lblItem1_suffix_1.Location = new Point(24, 177);
+            lblItem1_suffix_1.Location = new Point(24, 319);
             lblItem1_suffix_1.Name = "lblItem1_suffix_1";
             lblItem1_suffix_1.Size = new Size(71, 25);
             lblItem1_suffix_1.TabIndex = 4;
@@ -110,7 +141,7 @@
             // lblItem1_prefix_3
             // 
             lblItem1_prefix_3.AutoSize = true;
-            lblItem1_prefix_3.Location = new Point(24, 141);
+            lblItem1_prefix_3.Location = new Point(24, 283);
             lblItem1_prefix_3.Name = "lblItem1_prefix_3";
             lblItem1_prefix_3.Size = new Size(70, 25);
             lblItem1_prefix_3.TabIndex = 3;
@@ -119,7 +150,7 @@
             // lblItem1_prefix_2
             // 
             lblItem1_prefix_2.AutoSize = true;
-            lblItem1_prefix_2.Location = new Point(24, 106);
+            lblItem1_prefix_2.Location = new Point(24, 248);
             lblItem1_prefix_2.Name = "lblItem1_prefix_2";
             lblItem1_prefix_2.Size = new Size(70, 25);
             lblItem1_prefix_2.TabIndex = 2;
@@ -128,7 +159,7 @@
             // lblItem1_prefix_1
             // 
             lblItem1_prefix_1.AutoSize = true;
-            lblItem1_prefix_1.Location = new Point(24, 71);
+            lblItem1_prefix_1.Location = new Point(24, 213);
             lblItem1_prefix_1.Name = "lblItem1_prefix_1";
             lblItem1_prefix_1.Size = new Size(70, 25);
             lblItem1_prefix_1.TabIndex = 1;
@@ -147,7 +178,11 @@
             // 
             // panel2
             // 
+            panel2.Controls.Add(lblItem2_Level);
+            panel2.Controls.Add(lblItem2_Armor_Damage);
+            panel2.Controls.Add(lblItem2_baseAffix_2);
             panel2.Controls.Add(lblItem2_suffix_3);
+            panel2.Controls.Add(lblItem2_baseAffix_1);
             panel2.Controls.Add(lblItem2_suffix_2);
             panel2.Controls.Add(lblItem2_suffix_1);
             panel2.Controls.Add(lblItem2_prefix_3);
@@ -156,22 +191,48 @@
             panel2.Controls.Add(lblItem2);
             panel2.Location = new Point(373, 22);
             panel2.Name = "panel2";
-            panel2.Size = new Size(338, 294);
+            panel2.Size = new Size(338, 492);
             panel2.TabIndex = 7;
+            // 
+            // lblItem2_Armor_Damage
+            // 
+            lblItem2_Armor_Damage.AutoSize = true;
+            lblItem2_Armor_Damage.Location = new Point(24, 62);
+            lblItem2_Armor_Damage.Name = "lblItem2_Armor_Damage";
+            lblItem2_Armor_Damage.Size = new Size(0, 25);
+            lblItem2_Armor_Damage.TabIndex = 10;
+            // 
+            // lblItem2_baseAffix_2
+            // 
+            lblItem2_baseAffix_2.AutoSize = true;
+            lblItem2_baseAffix_2.Location = new Point(24, 138);
+            lblItem2_baseAffix_2.Name = "lblItem2_baseAffix_2";
+            lblItem2_baseAffix_2.Size = new Size(36, 25);
+            lblItem2_baseAffix_2.TabIndex = 10;
+            lblItem2_baseAffix_2.Text = "sss";
             // 
             // lblItem2_suffix_3
             // 
             lblItem2_suffix_3.AutoSize = true;
-            lblItem2_suffix_3.Location = new Point(24, 247);
+            lblItem2_suffix_3.Location = new Point(24, 389);
             lblItem2_suffix_3.Name = "lblItem2_suffix_3";
             lblItem2_suffix_3.Size = new Size(71, 25);
             lblItem2_suffix_3.TabIndex = 6;
             lblItem2_suffix_3.Text = "Suffix 3";
             // 
+            // lblItem2_baseAffix_1
+            // 
+            lblItem2_baseAffix_1.AutoSize = true;
+            lblItem2_baseAffix_1.Location = new Point(24, 105);
+            lblItem2_baseAffix_1.Name = "lblItem2_baseAffix_1";
+            lblItem2_baseAffix_1.Size = new Size(36, 25);
+            lblItem2_baseAffix_1.TabIndex = 9;
+            lblItem2_baseAffix_1.Text = "sss";
+            // 
             // lblItem2_suffix_2
             // 
             lblItem2_suffix_2.AutoSize = true;
-            lblItem2_suffix_2.Location = new Point(24, 212);
+            lblItem2_suffix_2.Location = new Point(24, 354);
             lblItem2_suffix_2.Name = "lblItem2_suffix_2";
             lblItem2_suffix_2.Size = new Size(71, 25);
             lblItem2_suffix_2.TabIndex = 5;
@@ -180,7 +241,7 @@
             // lblItem2_suffix_1
             // 
             lblItem2_suffix_1.AutoSize = true;
-            lblItem2_suffix_1.Location = new Point(24, 177);
+            lblItem2_suffix_1.Location = new Point(24, 319);
             lblItem2_suffix_1.Name = "lblItem2_suffix_1";
             lblItem2_suffix_1.Size = new Size(71, 25);
             lblItem2_suffix_1.TabIndex = 4;
@@ -189,7 +250,7 @@
             // lblItem2_prefix_3
             // 
             lblItem2_prefix_3.AutoSize = true;
-            lblItem2_prefix_3.Location = new Point(24, 141);
+            lblItem2_prefix_3.Location = new Point(24, 283);
             lblItem2_prefix_3.Name = "lblItem2_prefix_3";
             lblItem2_prefix_3.Size = new Size(70, 25);
             lblItem2_prefix_3.TabIndex = 3;
@@ -198,7 +259,7 @@
             // lblItem2_prefix_2
             // 
             lblItem2_prefix_2.AutoSize = true;
-            lblItem2_prefix_2.Location = new Point(24, 106);
+            lblItem2_prefix_2.Location = new Point(24, 248);
             lblItem2_prefix_2.Name = "lblItem2_prefix_2";
             lblItem2_prefix_2.Size = new Size(70, 25);
             lblItem2_prefix_2.TabIndex = 2;
@@ -207,7 +268,7 @@
             // lblItem2_prefix_1
             // 
             lblItem2_prefix_1.AutoSize = true;
-            lblItem2_prefix_1.Location = new Point(24, 71);
+            lblItem2_prefix_1.Location = new Point(24, 213);
             lblItem2_prefix_1.Name = "lblItem2_prefix_1";
             lblItem2_prefix_1.Size = new Size(70, 25);
             lblItem2_prefix_1.TabIndex = 1;
@@ -224,88 +285,9 @@
             lblItem2.TextAlign = ContentAlignment.MiddleCenter;
             lblItem2.Click += label7_Click;
             // 
-            // panel3
-            // 
-            panel3.Controls.Add(lblItem3_suffix_3);
-            panel3.Controls.Add(lblItem3_suffix_2);
-            panel3.Controls.Add(lblItem3_suffix_1);
-            panel3.Controls.Add(lblItem3_prefix_3);
-            panel3.Controls.Add(lblItem3_prefix_2);
-            panel3.Controls.Add(lblItem3_prefix_1);
-            panel3.Controls.Add(lblItem3);
-            panel3.Location = new Point(194, 322);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(338, 294);
-            panel3.TabIndex = 7;
-            // 
-            // lblItem3_suffix_3
-            // 
-            lblItem3_suffix_3.AutoSize = true;
-            lblItem3_suffix_3.Location = new Point(24, 247);
-            lblItem3_suffix_3.Name = "lblItem3_suffix_3";
-            lblItem3_suffix_3.Size = new Size(71, 25);
-            lblItem3_suffix_3.TabIndex = 6;
-            lblItem3_suffix_3.Text = "Suffix 3";
-            // 
-            // lblItem3_suffix_2
-            // 
-            lblItem3_suffix_2.AutoSize = true;
-            lblItem3_suffix_2.Location = new Point(24, 212);
-            lblItem3_suffix_2.Name = "lblItem3_suffix_2";
-            lblItem3_suffix_2.Size = new Size(71, 25);
-            lblItem3_suffix_2.TabIndex = 5;
-            lblItem3_suffix_2.Text = "Suffix 2";
-            // 
-            // lblItem3_suffix_1
-            // 
-            lblItem3_suffix_1.AutoSize = true;
-            lblItem3_suffix_1.Location = new Point(24, 177);
-            lblItem3_suffix_1.Name = "lblItem3_suffix_1";
-            lblItem3_suffix_1.Size = new Size(71, 25);
-            lblItem3_suffix_1.TabIndex = 4;
-            lblItem3_suffix_1.Text = "Suffix 1";
-            // 
-            // lblItem3_prefix_3
-            // 
-            lblItem3_prefix_3.AutoSize = true;
-            lblItem3_prefix_3.Location = new Point(24, 141);
-            lblItem3_prefix_3.Name = "lblItem3_prefix_3";
-            lblItem3_prefix_3.Size = new Size(70, 25);
-            lblItem3_prefix_3.TabIndex = 3;
-            lblItem3_prefix_3.Text = "Prefix 3";
-            // 
-            // lblItem3_prefix_2
-            // 
-            lblItem3_prefix_2.AutoSize = true;
-            lblItem3_prefix_2.Location = new Point(24, 106);
-            lblItem3_prefix_2.Name = "lblItem3_prefix_2";
-            lblItem3_prefix_2.Size = new Size(70, 25);
-            lblItem3_prefix_2.TabIndex = 2;
-            lblItem3_prefix_2.Text = "Prefix 2";
-            // 
-            // lblItem3_prefix_1
-            // 
-            lblItem3_prefix_1.AutoSize = true;
-            lblItem3_prefix_1.Location = new Point(24, 71);
-            lblItem3_prefix_1.Name = "lblItem3_prefix_1";
-            lblItem3_prefix_1.Size = new Size(70, 25);
-            lblItem3_prefix_1.TabIndex = 1;
-            lblItem3_prefix_1.Text = "Prefix 1";
-            // 
-            // lblItem3
-            // 
-            lblItem3.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            lblItem3.Location = new Point(24, 20);
-            lblItem3.Name = "lblItem3";
-            lblItem3.Size = new Size(289, 30);
-            lblItem3.TabIndex = 0;
-            lblItem3.Text = "Item 3";
-            lblItem3.TextAlign = ContentAlignment.MiddleCenter;
-            lblItem3.Click += label7_Click_1;
-            // 
             // btnCreate_Item_1
             // 
-            btnCreate_Item_1.Location = new Point(53, 633);
+            btnCreate_Item_1.Location = new Point(39, 706);
             btnCreate_Item_1.Name = "btnCreate_Item_1";
             btnCreate_Item_1.Size = new Size(148, 34);
             btnCreate_Item_1.TabIndex = 9;
@@ -315,7 +297,7 @@
             // 
             // btnCreate_Item_2
             // 
-            btnCreate_Item_2.Location = new Point(53, 673);
+            btnCreate_Item_2.Location = new Point(39, 746);
             btnCreate_Item_2.Name = "btnCreate_Item_2";
             btnCreate_Item_2.Size = new Size(148, 34);
             btnCreate_Item_2.TabIndex = 10;
@@ -325,7 +307,7 @@
             // 
             // btn_Create_Inventory
             // 
-            btn_Create_Inventory.Location = new Point(538, 633);
+            btn_Create_Inventory.Location = new Point(524, 706);
             btn_Create_Inventory.Name = "btn_Create_Inventory";
             btn_Create_Inventory.Size = new Size(173, 34);
             btn_Create_Inventory.TabIndex = 11;
@@ -336,7 +318,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(397, 678);
+            label1.Location = new Point(383, 751);
             label1.Name = "label1";
             label1.Size = new Size(140, 25);
             label1.TabIndex = 12;
@@ -344,14 +326,14 @@
             // 
             // txtInventoryMax
             // 
-            txtInventoryMax.Location = new Point(538, 678);
+            txtInventoryMax.Location = new Point(524, 751);
             txtInventoryMax.Name = "txtInventoryMax";
             txtInventoryMax.Size = new Size(173, 31);
             txtInventoryMax.TabIndex = 13;
             // 
             // btn_Combine_Items
             // 
-            btn_Combine_Items.Location = new Point(53, 713);
+            btn_Combine_Items.Location = new Point(39, 786);
             btn_Combine_Items.Name = "btn_Combine_Items";
             btn_Combine_Items.Size = new Size(148, 34);
             btn_Combine_Items.TabIndex = 14;
@@ -369,7 +351,7 @@
             // 
             // txtLevel
             // 
-            txtLevel.Location = new Point(538, 716);
+            txtLevel.Location = new Point(524, 789);
             txtLevel.Name = "txtLevel";
             txtLevel.Size = new Size(173, 31);
             txtLevel.TabIndex = 16;
@@ -378,11 +360,31 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(473, 718);
+            label2.Location = new Point(459, 791);
             label2.Name = "label2";
             label2.Size = new Size(51, 25);
             label2.TabIndex = 17;
             label2.Text = "Level";
+            // 
+            // lblItem1_Level
+            // 
+            lblItem1_Level.BackColor = Color.Transparent;
+            lblItem1_Level.Location = new Point(10, 444);
+            lblItem1_Level.Name = "lblItem1_Level";
+            lblItem1_Level.Size = new Size(303, 38);
+            lblItem1_Level.TabIndex = 10;
+            lblItem1_Level.Text = "label3";
+            lblItem1_Level.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // lblItem2_Level
+            // 
+            lblItem2_Level.BackColor = Color.Transparent;
+            lblItem2_Level.Location = new Point(10, 444);
+            lblItem2_Level.Name = "lblItem2_Level";
+            lblItem2_Level.Size = new Size(314, 38);
+            lblItem2_Level.TabIndex = 11;
+            lblItem2_Level.Text = "label4";
+            lblItem2_Level.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // Form1
             // 
@@ -398,7 +400,6 @@
             Controls.Add(btn_Create_Inventory);
             Controls.Add(btnCreate_Item_2);
             Controls.Add(btnCreate_Item_1);
-            Controls.Add(panel3);
             Controls.Add(panel2);
             Controls.Add(panel1);
             Name = "Form1";
@@ -407,8 +408,6 @@
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
-            panel3.ResumeLayout(false);
-            panel3.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -448,5 +447,13 @@
         private ListBox lstInventory;
         private TextBox txtLevel;
         private Label label2;
+        private Label lblItem1_baseAffix_2;
+        private Label lblItem1_baseAffix_1;
+        private Label lblItem2_baseAffix_2;
+        private Label lblItem2_baseAffix_1;
+        private Label lblItem1_Armor_Damage;
+        private Label lblItem2_Armor_Damage;
+        private Label lblItem2_Level;
+        private Label lblItem1_Level;
     }
 }

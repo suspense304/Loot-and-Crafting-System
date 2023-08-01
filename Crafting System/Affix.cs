@@ -32,8 +32,6 @@ namespace Crafting_System
         SpellRadius,
         [Display(Name = "Strength")]
         Strength,
-        [Display(Name = "Willpower")]
-        Willpower,
     }
 
 }

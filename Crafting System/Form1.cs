@@ -1,3 +1,4 @@
+using Crafting_System.Gear;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 
@@ -6,6 +7,8 @@ namespace Crafting_System
     public partial class Form1 : Form
     {
         ItemCreationService itemCreationService = new ItemCreationService();
+        GearService gearService = new GearService();
+        Random random = new Random();
         public Form1()
         {
             InitializeComponent();
@@ -38,7 +41,8 @@ namespace Crafting_System
 
             for (int i = 0; i < 5000; i++)
             {
-                EquipmentItem equipmentItem = itemCreationService.CreateEquipmentItem(Convert.ToInt16(txtLevel.Text), itemCreationService.GetRandomGearSlot());
+                EquipmentItem equipmentItem = itemCreationService.CreateEquipmentItem(
+                    Convert.ToInt16(txtLevel.Text), gearService.GetRandomGearSlot(random));
                 switch (equipmentItem.Rarity)
                 {
                     case Rarity.Normal: normalItems++; break;
@@ -60,9 +64,35 @@ namespace Crafting_System
 
         private void btnCreate_Item_1_Click(object sender, EventArgs e)
         {
-            EquipmentItem equipmentItem = itemCreationService.CreateEquipmentItem(Convert.ToInt16(txtLevel.Text), itemCreationService.GetRandomGearSlot());
+            EquipmentItem equipmentItem = itemCreationService.CreateEquipmentItem(Convert.ToInt16(txtLevel.Text), gearService.GetRandomGearSlot(random));
 
             lblItem1.Text = equipmentItem.Name + " " + equipmentItem.MaxAffix;
+            lblItem1_Level.Text = "LEVEL: " + equipmentItem.RequiredLevel.ToString();
+
+            if (equipmentItem.Armor != null) lblItem1_Armor_Damage.Text = "Armor: " + equipmentItem.Armor.ToString();
+            if (equipmentItem.AttackDamage != null) lblItem1_Armor_Damage.Text = "Damage: " + equipmentItem.AttackDamage.ToString();
+
+            if (equipmentItem.BaseAffixes != null)
+            {
+                if (equipmentItem.BaseAffixes.Count == 1)
+                {
+                    lblItem1_baseAffix_1.Text = $"{equipmentItem.BaseAffixes[0].Affix.GetDisplayName()} - {equipmentItem.BaseAffixes[0].Values.Value} ( {equipmentItem.BaseAffixes[0].Values.MinValue} - {equipmentItem.BaseAffixes[0].Values.MaxValue} )";
+                    lblItem1_baseAffix_2.Text = "";
+                }
+
+                if (equipmentItem.BaseAffixes.Count == 2)
+                {
+                    lblItem1_baseAffix_1.Text = $"{equipmentItem.BaseAffixes[0].Affix.GetDisplayName()} - {equipmentItem.BaseAffixes[0].Values.Value} ( {equipmentItem.BaseAffixes[0].Values.MinValue} - {equipmentItem.BaseAffixes[0].Values.MaxValue} )";
+                    lblItem1_baseAffix_2.Text = $"{equipmentItem.BaseAffixes[1].Affix.GetDisplayName()} - {equipmentItem.BaseAffixes[1].Values.Value} ( {equipmentItem.BaseAffixes[1].Values.MinValue} - {equipmentItem.BaseAffixes[1].Values.MaxValue} )";
+                }
+            }
+            else
+            {
+                lblItem1_baseAffix_1.Text = "";
+                lblItem1_baseAffix_2.Text = "";
+
+            }
+
             switch (equipmentItem.Prefixes.Count)
             {
                 case 0:
@@ -92,18 +122,18 @@ namespace Crafting_System
                     lblItem1_suffix_1.Text = "";
                     lblItem1_suffix_2.Text = "";
                     lblItem1_suffix_3.Text = "";
-                    break; 
-                case 1:    
+                    break;
+                case 1:
                     lblItem1_suffix_1.Text = $"{equipmentItem.Suffixes[0].Affix.GetDisplayName()} - {equipmentItem.Suffixes[0].Values.Value} ( {equipmentItem.Suffixes[0].Values.MinValue} - {equipmentItem.Suffixes[0].Values.MaxValue} )";
                     lblItem1_suffix_2.Text = "";
                     lblItem1_suffix_3.Text = "";
-                    break; 
-                case 2:    
+                    break;
+                case 2:
                     lblItem1_suffix_1.Text = $"{equipmentItem.Suffixes[0].Affix.GetDisplayName()} - {equipmentItem.Suffixes[0].Values.Value} ( {equipmentItem.Suffixes[0].Values.MinValue} - {equipmentItem.Suffixes[0].Values.MaxValue} )";
                     lblItem1_suffix_2.Text = $"{equipmentItem.Suffixes[1].Affix.GetDisplayName()} - {equipmentItem.Suffixes[1].Values.Value} ( {equipmentItem.Suffixes[1].Values.MinValue} - {equipmentItem.Suffixes[1].Values.MaxValue} )";
                     lblItem1_suffix_3.Text = "";
-                    break; 
-                case 3:    
+                    break;
+                case 3:
                     lblItem1_suffix_1.Text = $"{equipmentItem.Suffixes[0].Affix.GetDisplayName()} - {equipmentItem.Suffixes[0].Values.Value} ( {equipmentItem.Suffixes[0].Values.MinValue} - {equipmentItem.Suffixes[0].Values.MaxValue} )";
                     lblItem1_suffix_2.Text = $"{equipmentItem.Suffixes[1].Affix.GetDisplayName()} - {equipmentItem.Suffixes[1].Values.Value} ( {equipmentItem.Suffixes[1].Values.MinValue} - {equipmentItem.Suffixes[1].Values.MaxValue} )";
                     lblItem1_suffix_3.Text = $"{equipmentItem.Suffixes[2].Affix.GetDisplayName()} - {equipmentItem.Suffixes[2].Values.Value} ( {equipmentItem.Suffixes[2].Values.MinValue} - {equipmentItem.Suffixes[2].Values.MaxValue} )";
@@ -112,9 +142,36 @@ namespace Crafting_System
         }
         private void btnCreate_Item_2_Click(object sender, EventArgs e)
         {
-            EquipmentItem equipmentItem = itemCreationService.CreateEquipmentItem(Convert.ToInt16(txtLevel.Text), itemCreationService.GetRandomGearSlot());
+            EquipmentItem equipmentItem = itemCreationService.CreateEquipmentItem(Convert.ToInt16(txtLevel.Text), gearService.GetRandomGearSlot(random));
 
             lblItem2.Text = equipmentItem.Name + " " + equipmentItem.MaxAffix;
+            lblItem2_Level.Text = "LEVEL: " + equipmentItem.RequiredLevel.ToString();
+
+
+            if (equipmentItem.Armor != null) lblItem2_Armor_Damage.Text = "Armor: " + equipmentItem.Armor.ToString();
+            if (equipmentItem.AttackDamage != null) lblItem2_Armor_Damage.Text = "Damage: " + equipmentItem.AttackDamage.ToString();
+
+            if (equipmentItem.BaseAffixes != null)
+            {
+                if (equipmentItem.BaseAffixes.Count == 1)
+                {
+                    lblItem2_baseAffix_1.Text = $"{equipmentItem.BaseAffixes[0].Affix.GetDisplayName()} - {equipmentItem.BaseAffixes[0].Values.Value} ( {equipmentItem.BaseAffixes[0].Values.MinValue} - {equipmentItem.BaseAffixes[0].Values.MaxValue} )";
+                    lblItem2_baseAffix_2.Text = "";
+                }
+
+                if (equipmentItem.BaseAffixes.Count == 2)
+                {
+                    lblItem2_baseAffix_1.Text = $"{equipmentItem.BaseAffixes[0].Affix.GetDisplayName()} - {equipmentItem.BaseAffixes[0].Values.Value} ( {equipmentItem.BaseAffixes[0].Values.MinValue} - {equipmentItem.BaseAffixes[0].Values.MaxValue} )";
+                    lblItem2_baseAffix_2.Text = $"{equipmentItem.BaseAffixes[1].Affix.GetDisplayName()} - {equipmentItem.BaseAffixes[1].Values.Value} ( {equipmentItem.BaseAffixes[1].Values.MinValue} - {equipmentItem.BaseAffixes[1].Values.MaxValue} )";
+                }
+            }
+            else
+            {
+                lblItem2_baseAffix_1.Text = "";
+                lblItem2_baseAffix_2.Text = "";
+
+            }
+
             switch (equipmentItem.Prefixes.Count)
             {
                 case 0:
@@ -161,6 +218,16 @@ namespace Crafting_System
                     lblItem2_suffix_3.Text = $"{equipmentItem.Suffixes[2].Affix.GetDisplayName()} - {equipmentItem.Suffixes[2].Values.Value} ( {equipmentItem.Suffixes[2].Values.MinValue} - {equipmentItem.Suffixes[2].Values.MaxValue} )";
                     break;
             }
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

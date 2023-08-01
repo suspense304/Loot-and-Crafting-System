@@ -20,7 +20,6 @@
             Stats.Add(Affix.Projectiles, 0);
             Stats.Add(Affix.SpellRadius, 0);
             Stats.Add(Affix.Strength, 0);
-            Stats.Add(Affix.Willpower, 0);
         }
 
         

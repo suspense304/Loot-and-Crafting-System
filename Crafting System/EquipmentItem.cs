@@ -3,10 +3,14 @@
     public class EquipmentItem
     {
         public string Name { get; set; } = string.Empty;
+        public int? AttackDamage { get; set; }
+        public int? Armor { get; set; }
         public Rarity Rarity { get; set; }
         public GearSlot Slot { get; set; }
+        public List<ItemAffix> BaseAffixes { get; set; }
         public List<ItemAffix> Prefixes { get; set; }
         public List<ItemAffix> Suffixes { get; set; }
+        public int RequiredLevel { get; set; }
         public int MaxAffix => GetMaxAffix();
         private const int MaxAffixesPerType = 3;
 

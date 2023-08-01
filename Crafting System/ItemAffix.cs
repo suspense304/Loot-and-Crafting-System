@@ -2,7 +2,7 @@
 {
     public class ItemAffix
     {
-        public Affix Affix { get; private set; }
+        public Affix Affix { get; set; }
         public AffixValue? Values { get; set; }
 
         public ItemAffix(Affix affix)
