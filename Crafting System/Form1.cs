@@ -9,6 +9,13 @@ namespace Crafting_System
         ItemCreationService itemCreationService = new ItemCreationService();
         GearService gearService = new GearService();
         Random random = new Random();
+
+        int normalItems = 0;
+        int magicItems = 0;
+        int rareItems = 0;
+        int epicItems = 0;
+        int legendaryItems = 0;
+        int superItems = 0;
         public Form1()
         {
             InitializeComponent();
@@ -31,26 +38,23 @@ namespace Crafting_System
 
         private void btn_Create_Inventory_Click(object sender, EventArgs e)
         {
-            int normalItems = 0;
-            int magicItems = 0;
-            int rareItems = 0;
-            int epicItems = 0;
-            int legendaryItems = 0;
-            int superItems = 0;
-
-
-            for (int i = 0; i < 5000; i++)
+            lstInventory.Items.Clear();
+            for (int i = 0; i < 10000; i++)
             {
-                EquipmentItem equipmentItem = itemCreationService.CreateEquipmentItem(
-                    Convert.ToInt16(txtLevel.Text), gearService.GetRandomGearSlot(random));
-                switch (equipmentItem.Rarity)
+                bool weaponDrop = random.Next(0, 100) < 11;
+                if (weaponDrop)
                 {
-                    case Rarity.Normal: normalItems++; break;
-                    case Rarity.Magic: magicItems++; break;
-                    case Rarity.Rare: rareItems++; break;
-                    case Rarity.Epic: epicItems++; break;
-                    case Rarity.Legendary: legendaryItems++; break;
-                    case Rarity.Super: superItems++; break;
+                    EquipmentItem equipmentItem = itemCreationService.CreateEquipmentItem(
+                                        Convert.ToInt16(txtLevel.Text), gearService.GetRandomGearSlot(random));
+                    switch (equipmentItem.Rarity)
+                    {
+                        case Rarity.Normal: normalItems++; break;
+                        case Rarity.Magic: magicItems++; break;
+                        case Rarity.Rare: rareItems++; break;
+                        case Rarity.Epic: epicItems++; break;
+                        case Rarity.Legendary: legendaryItems++; break;
+                        case Rarity.Super: superItems++; break;
+                    }
                 }
             }
 
@@ -62,11 +66,25 @@ namespace Crafting_System
             lstInventory.Items.Add($"Super: {superItems}");
         }
 
+        private void AddItemToList(EquipmentItem equipmentItem)
+        {
+            switch (equipmentItem.Rarity)
+            {
+                case Rarity.Normal: normalItems++; break;
+                case Rarity.Magic: magicItems++; break;
+                case Rarity.Rare: rareItems++; break;
+                case Rarity.Epic: epicItems++; break;
+                case Rarity.Legendary: legendaryItems++; break;
+                case Rarity.Super: superItems++; break;
+            }
+        }
+
         private void btnCreate_Item_1_Click(object sender, EventArgs e)
         {
             EquipmentItem equipmentItem = itemCreationService.CreateEquipmentItem(Convert.ToInt16(txtLevel.Text), gearService.GetRandomGearSlot(random));
+            AddItemToList(equipmentItem);
 
-            lblItem1.Text = equipmentItem.Name + " " + equipmentItem.MaxAffix;
+            lblItem1.Text = equipmentItem.Name;
             lblItem1_Level.Text = "LEVEL: " + equipmentItem.RequiredLevel.ToString();
 
             if (equipmentItem.Armor != null) lblItem1_Armor_Damage.Text = "Armor: " + equipmentItem.Armor.ToString();
@@ -144,7 +162,7 @@ namespace Crafting_System
         {
             EquipmentItem equipmentItem = itemCreationService.CreateEquipmentItem(Convert.ToInt16(txtLevel.Text), gearService.GetRandomGearSlot(random));
 
-            lblItem2.Text = equipmentItem.Name + " " + equipmentItem.MaxAffix;
+            lblItem2.Text = equipmentItem.Name;
             lblItem2_Level.Text = "LEVEL: " + equipmentItem.RequiredLevel.ToString();
 
 
@@ -228,6 +246,17 @@ namespace Crafting_System
         private void label3_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            lstInventory.Items.Clear();
+            normalItems = 0;
+            magicItems = 0;
+            rareItems = 0;
+            epicItems = 0;
+            legendaryItems = 0;
+            superItems = 0;
         }
     }
 }

@@ -11,6 +11,7 @@ namespace Crafting_System.Gear
     public class Head
     {
         private static List<BaseItem> _baseItems = new List<BaseItem>();
+        private static List<EquipmentItem> _legendaryItems = new List<EquipmentItem>();
         private static List<LevelBucket> _buckets = new List<LevelBucket>();
 
         public static void PopulateHeadGear(Random random)
@@ -25,7 +26,67 @@ namespace Crafting_System.Gear
             _buckets.Add(LevelBucket.Three);
             _buckets.Add(LevelBucket.Four);
             _buckets.Add(LevelBucket.Five);
+            PopulateLegendaryItems(random);
         }
+
+        public static List<EquipmentItem> GetLegendaryItems()
+        {
+            return _legendaryItems;
+        }
+
+        public static void PopulateLegendaryItems(Random random)
+        {
+            _legendaryItems.Add(new EquipmentItem
+            {
+                Name = "Kalen's Crown",
+                Armor = 188,
+                Rarity = Rarity.Legendary,
+                RequiredLevel = 55,
+                Slot = GearSlot.Head,
+                BaseAffixes = new List<ItemAffix>
+                {
+                    new ItemAffix(Affix.CritChance)
+                    {
+                        Values = new AffixValue { MinValue = 6, MaxValue = 10, Value = random.Next(6, 10) },
+                    },
+                    new ItemAffix(Affix.CritDamage)
+                    {
+                        Values = new AffixValue { MinValue = 35, MaxValue = 50, Value = random.Next(35, 50) },
+                    },
+                },
+                Prefixes = new List<ItemAffix>
+                {
+                    new ItemAffix(Affix.Dexterity)
+                    {
+                        Values = new AffixValue { MinValue = 84, MaxValue = 125, Value = random.Next(84, 125) },
+                    },
+                    new ItemAffix(Affix.AttackSpeed)
+                    {
+                        Values = new AffixValue { MinValue = 10, MaxValue = 15, Value = random.Next(10, 20) },
+                    },
+                    new ItemAffix(Affix.Projectiles)
+                    {
+                        Values = new AffixValue { MinValue = 1, MaxValue = 2, Value = random.Next(1, 2) },
+                    },
+                },
+                Suffixes = new List<ItemAffix>
+                {
+                    new ItemAffix(Affix.MovementSpeed)
+                    {
+                        Values = new AffixValue { MinValue = 10, MaxValue = 15, Value = random.Next(10, 15) },
+                    },
+                    new ItemAffix(Affix.DodgeChance)
+                    {
+                        Values = new AffixValue { MinValue = 10, MaxValue = 15, Value = random.Next(10, 15) },
+                    },
+                    new ItemAffix(Affix.MagicFind)
+                    {
+                        Values = new AffixValue { MinValue = 10, MaxValue = 20, Value = random.Next(10, 20) },
+                    },
+                },
+            });
+        }
+
         public static void GetAffixes(AffixType affixType, List<ItemAffix> affixes)
         {
             affixes.AddRange(affixType == AffixType.Prefix
@@ -43,18 +104,18 @@ namespace Crafting_System.Gear
                             });
         }
 
-        public static BaseItem GetBaseItem(int level, Random random, Rarity rarity)
+        public static BaseItem GetBaseItem(int level, Random random, Rarity rarity, int maxBucket)
         {
             int itemLevel = random.Next(level - 3, level + 3);
 
             BaseItem value = itemLevel switch
             {
-                int i when i < 13 => GetRandomBaseItem(1, random),
-                int i when i >= 13 && i < 26 => GetRandomBaseItem(2, random),
-                int i when i >= 26 && i < 39 => GetRandomBaseItem(3, random),
-                int i when i >= 39 && i < 55 => GetRandomBaseItem(4, random),
-                int i when i >= 55 => GetRandomBaseItem(5, random),
-                _ => GetRandomBaseItem(1, random),
+                int i when i < 13 => GetRandomBaseItem(maxBucket, random),
+                int i when i >= 13 && i < 26 => GetRandomBaseItem(maxBucket, random),
+                int i when i >= 26 && i < 39 => GetRandomBaseItem(maxBucket, random),
+                int i when i >= 39 && i < 55 => GetRandomBaseItem(maxBucket, random),
+                int i when i >= 55 => GetRandomBaseItem(maxBucket, random),
+                _ => GetRandomBaseItem(maxBucket, random),
             };
 
             return value;

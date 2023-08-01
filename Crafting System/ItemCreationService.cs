@@ -11,17 +11,24 @@ namespace Crafting_System
     public class ItemCreationService
     {
         private Random random = new Random();
+        private Dictionary<Rarity, int> rarityWeight = new Dictionary<Rarity, int>();
 
-        const int NORMAL_RARITY_WEIGHT = 1200;
-        const int MAGIC_RARITY_WEIGHT = 650;
-        const int RARE_RARITY_WEIGHT = 350;
-        const int EPIC_RARITY_WEIGHT = 125;
-        const int LEGENDARY_RARITY_WEIGHT = 50;
-        const int SUPER_RARITY_WEIGHT = 10;
-        const int RARITY_WEIGHT = 2385;
+        int NORMAL_RARITY_WEIGHT = 600;
+        int MAGIC_RARITY_WEIGHT = 250;
+        int RARE_RARITY_WEIGHT = 100;
+        int EPIC_RARITY_WEIGHT = 40;
+        int LEGENDARY_RARITY_WEIGHT = 7;
+        int SUPER_RARITY_WEIGHT = 3;
+
         public ItemCreationService()
         {
             Head.PopulateHeadGear(random);
+            rarityWeight.Add(Rarity.Normal, NORMAL_RARITY_WEIGHT);
+            rarityWeight.Add(Rarity.Magic, MAGIC_RARITY_WEIGHT);
+            rarityWeight.Add(Rarity.Rare, RARE_RARITY_WEIGHT);
+            rarityWeight.Add(Rarity.Epic, EPIC_RARITY_WEIGHT);
+            rarityWeight.Add(Rarity.Legendary, LEGENDARY_RARITY_WEIGHT);
+            rarityWeight.Add(Rarity.Super, SUPER_RARITY_WEIGHT);
         }
         public AffixValue GetAffixValue(Affix affix, int level)
         {
@@ -120,6 +127,50 @@ namespace Crafting_System
             };
             return value;
         }
+
+        public int GetBucket(int level)
+        {
+            int value = level switch
+            {
+                int i when i < 13 => 1,
+                int i when i >= 13 && i < 26 => 2,
+                int i when i >= 26 && i < 39 => 3,
+                int i when i >= 39 && i < 55 => 4,
+                int i when i >= 55 => 5,
+                _ => 1,
+            };
+
+            return value;
+        }
+
+        private EquipmentItem GetNonLegendaryEquipmentItem(EquipmentItem item, int level, int maxBucket)
+        {
+            BaseItem basePiece = Head.GetBaseItem(level, random, item.Rarity, maxBucket);
+            item.Name = basePiece.Name;
+            item.BaseAffixes = basePiece.Affixes;
+            item.Armor = basePiece.Armor ?? null;
+            item.AttackDamage = basePiece.AttackDamge ?? null;
+            item.RequiredLevel = basePiece.RequiredLevel;
+
+            return item;
+        }
+
+        private EquipmentItem GetLegendaryEquipmentItem(EquipmentItem item, int level, int maxBucket)
+        {
+            var legendaryItems = Head.GetLegendaryItems().Where(w => GetBucket(w.RequiredLevel) <= maxBucket).ToList();
+            if (legendaryItems.Any())
+            {
+                var legendaryRoll = random.Next(legendaryItems.Count);
+                item = legendaryItems[legendaryRoll];
+            } else
+            {
+                item.Rarity = Rarity.Epic;
+                item = GetNonLegendaryEquipmentItem(item, level, maxBucket);
+            }
+
+            return item;
+        }
+
         public EquipmentItem CreateEquipmentItem(int level, GearSlot slot)
         {
             EquipmentItem item = new EquipmentItem();
@@ -127,13 +178,18 @@ namespace Crafting_System
 
             if(slot == GearSlot.Head)
             {
-                BaseItem basePiece = Head.GetBaseItem(level, random, item.Rarity);
-                item.Name = basePiece.Name;
-                item.BaseAffixes = basePiece.Affixes;
-                item.Armor = basePiece.Armor ?? null;
-                item.AttackDamage = basePiece.AttackDamge ?? null;
-                item.RequiredLevel = basePiece.RequiredLevel;
-            } else
+                int maxBucket = GetBucket(level);
+
+                if (item.Rarity == Rarity.Legendary)
+                {
+                    item = GetLegendaryEquipmentItem(item, level, maxBucket);
+
+                } else
+                {
+                    item = GetNonLegendaryEquipmentItem(item, level, maxBucket);
+                }
+            } 
+            else
             {
                 item.Name = item.Rarity.ToString();
             }
@@ -217,13 +273,64 @@ namespace Crafting_System
         }
         private Rarity RollRarity(int level)
         {
-            int roll = random.Next(1, RARITY_WEIGHT - (level * 20));
-            if (roll < SUPER_RARITY_WEIGHT) return Rarity.Super;
-            if (roll < LEGENDARY_RARITY_WEIGHT) return Rarity.Legendary;
-            if (roll < EPIC_RARITY_WEIGHT) return Rarity.Epic;
-            if (roll < RARE_RARITY_WEIGHT) return Rarity.Rare;
-            if (roll < MAGIC_RARITY_WEIGHT) return Rarity.Magic;
-            return Rarity.Normal;
+            UpdateRarityWeights(level);
+            int weight = rarityWeight.Sum(x => x.Value);
+            int roll = random.Next(1, weight);
+            if (roll < rarityWeight[Rarity.Super]) return Rarity.Super;
+            if (roll < rarityWeight[Rarity.Legendary]) return Rarity.Legendary;
+            if (roll < rarityWeight[Rarity.Epic]) return Rarity.Epic;
+            if (roll < rarityWeight[Rarity.Rare]) return Rarity.Rare;
+            if (roll < rarityWeight[Rarity.Magic]) return Rarity.Magic;
+            
+            if(level < 55) return Rarity.Normal; 
+                else return Rarity.Magic;
+        }
+
+        private void UpdateRarityWeights(int level)
+        {
+            switch(level)
+            {
+                case int i when i < 13:
+                    rarityWeight[Rarity.Super] = 0;
+                    rarityWeight[Rarity.Legendary] = 0;
+                    rarityWeight[Rarity.Epic] = 20;
+                    rarityWeight[Rarity.Rare] = 100;
+                    rarityWeight[Rarity.Magic] = 300;
+                    rarityWeight[Rarity.Normal] = 800;
+                    break;
+                case int i when i >= 13 && i < 26:
+                    rarityWeight[Rarity.Super] = 0;
+                    rarityWeight[Rarity.Legendary] = 1;
+                    rarityWeight[Rarity.Epic] = 40;
+                    rarityWeight[Rarity.Rare] = 120;
+                    rarityWeight[Rarity.Magic] = 300;
+                    rarityWeight[Rarity.Normal] = 500;
+                    break;
+                case int i when i >= 26 && i < 39:
+                    rarityWeight[Rarity.Super] = 2;
+                    rarityWeight[Rarity.Legendary] = 5;
+                    rarityWeight[Rarity.Epic] = 100;
+                    rarityWeight[Rarity.Rare] = 300;
+                    rarityWeight[Rarity.Magic] = 800;
+                    rarityWeight[Rarity.Normal] = 300;
+                    break;
+                case int i when i >= 39 && i < 55:
+                    rarityWeight[Rarity.Super] = 3;
+                    rarityWeight[Rarity.Legendary] = 25;
+                    rarityWeight[Rarity.Epic] = 150;
+                    rarityWeight[Rarity.Rare] = 400;
+                    rarityWeight[Rarity.Magic] = 800;
+                    rarityWeight[Rarity.Normal] = 0;
+                    break;
+                case int i when i >= 55:
+                    rarityWeight[Rarity.Super] = 25;
+                    rarityWeight[Rarity.Legendary] = 100;
+                    rarityWeight[Rarity.Epic] = 250;
+                    rarityWeight[Rarity.Rare] = 600;
+                    rarityWeight[Rarity.Magic] = 0;
+                    rarityWeight[Rarity.Normal] = 0;
+                    break;
+            }
         }
     }
 

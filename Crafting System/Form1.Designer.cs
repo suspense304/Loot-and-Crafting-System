@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            lblItem1_Level = new Label();
             lblItem1_Armor_Damage = new Label();
             lblItem1_baseAffix_2 = new Label();
             lblItem1_baseAffix_1 = new Label();
@@ -40,6 +41,7 @@
             lblItem1_prefix_1 = new Label();
             lblItem1 = new Label();
             panel2 = new Panel();
+            lblItem2_Level = new Label();
             lblItem2_Armor_Damage = new Label();
             lblItem2_baseAffix_2 = new Label();
             lblItem2_suffix_3 = new Label();
@@ -59,8 +61,7 @@
             lstInventory = new ListBox();
             txtLevel = new TextBox();
             label2 = new Label();
-            lblItem1_Level = new Label();
-            lblItem2_Level = new Label();
+            button1 = new Button();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             SuspendLayout();
@@ -83,6 +84,16 @@
             panel1.Size = new Size(338, 492);
             panel1.TabIndex = 0;
             panel1.Paint += panel1_Paint;
+            // 
+            // lblItem1_Level
+            // 
+            lblItem1_Level.BackColor = Color.Transparent;
+            lblItem1_Level.Location = new Point(10, 444);
+            lblItem1_Level.Name = "lblItem1_Level";
+            lblItem1_Level.Size = new Size(303, 38);
+            lblItem1_Level.TabIndex = 10;
+            lblItem1_Level.Text = "label3";
+            lblItem1_Level.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblItem1_Armor_Damage
             // 
@@ -193,6 +204,16 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(338, 492);
             panel2.TabIndex = 7;
+            // 
+            // lblItem2_Level
+            // 
+            lblItem2_Level.BackColor = Color.Transparent;
+            lblItem2_Level.Location = new Point(10, 444);
+            lblItem2_Level.Name = "lblItem2_Level";
+            lblItem2_Level.Size = new Size(314, 38);
+            lblItem2_Level.TabIndex = 11;
+            lblItem2_Level.Text = "label4";
+            lblItem2_Level.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblItem2_Armor_Damage
             // 
@@ -307,7 +328,7 @@
             // 
             // btn_Create_Inventory
             // 
-            btn_Create_Inventory.Location = new Point(524, 706);
+            btn_Create_Inventory.Location = new Point(524, 607);
             btn_Create_Inventory.Name = "btn_Create_Inventory";
             btn_Create_Inventory.Size = new Size(173, 34);
             btn_Create_Inventory.TabIndex = 11;
@@ -366,31 +387,22 @@
             label2.TabIndex = 17;
             label2.Text = "Level";
             // 
-            // lblItem1_Level
+            // button1
             // 
-            lblItem1_Level.BackColor = Color.Transparent;
-            lblItem1_Level.Location = new Point(10, 444);
-            lblItem1_Level.Name = "lblItem1_Level";
-            lblItem1_Level.Size = new Size(303, 38);
-            lblItem1_Level.TabIndex = 10;
-            lblItem1_Level.Text = "label3";
-            lblItem1_Level.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // lblItem2_Level
-            // 
-            lblItem2_Level.BackColor = Color.Transparent;
-            lblItem2_Level.Location = new Point(10, 444);
-            lblItem2_Level.Name = "lblItem2_Level";
-            lblItem2_Level.Size = new Size(314, 38);
-            lblItem2_Level.TabIndex = 11;
-            lblItem2_Level.Text = "label4";
-            lblItem2_Level.TextAlign = ContentAlignment.MiddleCenter;
+            button1.Location = new Point(524, 659);
+            button1.Name = "button1";
+            button1.Size = new Size(173, 34);
+            button1.TabIndex = 18;
+            button1.Text = "Clear Inventory";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1258, 1004);
+            Controls.Add(button1);
             Controls.Add(label2);
             Controls.Add(txtLevel);
             Controls.Add(lstInventory);
@@ -455,5 +467,6 @@
         private Label lblItem2_Armor_Damage;
         private Label lblItem2_Level;
         private Label lblItem1_Level;
+        private Button button1;
     }
 }
