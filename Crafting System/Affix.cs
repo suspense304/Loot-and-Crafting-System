@@ -4,34 +4,79 @@ namespace Crafting_System
 {
     public enum Affix
     {
+        [Display(Name = "All Skills")]
+        Prefix_AllSkills,
+
         [Display(Name = "Armor")]
-        Armor,
+        Prefix_Armor,
+
         [Display(Name = "Attack Speed")]
-        AttackSpeed,
+        Prefix_AttackSpeed,
+
+        [Display(Name = "Cold Damage")]
+        Prefix_ColdDamage,
+
+        [Display(Name = "Fire Skills")]
+        Prefix_ColdSkills,
+
+        [Display(Name = "Cooldown Reduction")]
+        Prefix_CooldownReduction,
+
         [Display(Name = "Critical Hit Chance")]
-        CritChance,
+        Prefix_CritChance,
+
         [Display(Name = "Critical Hit Damage")]
-        CritDamage,
+        Prefix_CritDamage,
+
         [Display(Name = "Dexterity")]
-        Dexterity,
-        [Display(Name = "Dodge Chance")]
-        DodgeChance,
-        [Display(Name = "Gold Find")]
-        GoldFind,
-        [Display(Name = "Health Regen")]
-        HealthRegen,
+        Prefix_Dexterity,
+
+        [Display(Name = "Fire Damage")]
+        Prefix_FireDamage,
+
+        [Display(Name = "Fire Skills")]
+        Prefix_FireSkills,
+
         [Display(Name = "Intelligence")]
-        Intelligence,
-        [Display(Name = "Attack Speed")]
-        MagicFind,
-        [Display(Name = "Movement Speed")]
-        MovementSpeed,
-        [Display(Name = "Projectiles")]
-        Projectiles,
-        [Display(Name = "Spell Radius")]
-        SpellRadius,
+        Prefix_Intelligence,
+
+        [Display(Name = "Life")]
+        Prefix_Life,
+
+        [Display(Name = "Lightning Damage")]
+        Prefix_LightningDamage,
+
+        [Display(Name = "Lightning Skills")]
+        Prefix_LightningSkills,
+
         [Display(Name = "Strength")]
-        Strength,
+        Prefix_Strength,
+
+
+
+
+
+
+        [Display(Name = "Dodge Chance")]
+        Suffix_DodgeChance,
+
+        [Display(Name = "Gold Find")]
+        Suffix_GoldFind,
+
+        [Display(Name = "Health Regen")]
+        Suffix_HealthRegen,
+
+        [Display(Name = "Magic Find")]
+        Suffix_MagicFind,
+
+        [Display(Name = "Movement Speed")]
+        Suffix_MovementSpeed,
+
+        [Display(Name = "Projectiles")]
+        Suffix_Projectiles,
+
+        [Display(Name = "Spell Radius")]
+        Suffix_SpellRadius,
     }
 
 }

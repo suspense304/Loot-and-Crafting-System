@@ -58,13 +58,13 @@ namespace Crafting_System.Gear
             switch (slot)
             {
                 case GearSlot.Head:
-                    Head.GetAffixes(affixType, affixes);
+                    new Head().GetAffixes(affixType, affixes);
                     break;
                 case GearSlot.Shoulders:
                     Shoulders.GetAffixes(affixType, affixes);
                     break;
                 case GearSlot.Chest:
-                    Chest.GetAffixes(affixType, affixes);
+                    new Chest().GetAffixes(affixType, affixes);
                     break;
                 case GearSlot.Gloves:
                     Gloves.GetAffixes(affixType, affixes);

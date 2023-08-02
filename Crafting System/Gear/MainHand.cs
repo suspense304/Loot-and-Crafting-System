@@ -12,20 +12,20 @@ namespace Crafting_System.Gear
         {
             affixes.AddRange(affixType == AffixType.Prefix
                         ? new[] {
-                            new ItemAffix(Affix.AttackSpeed),
-                            new ItemAffix(Affix.CritChance),
-                            new ItemAffix(Affix.CritDamage),
-                            new ItemAffix(Affix.Dexterity),
-                            new ItemAffix(Affix.Intelligence),
-                            new ItemAffix(Affix.Projectiles),
-                            new ItemAffix(Affix.Strength),
+                            new ItemAffix(Affix.Prefix_AttackSpeed),
+                            new ItemAffix(Affix.Prefix_CritChance),
+                            new ItemAffix(Affix.Prefix_CritDamage),
+                            new ItemAffix(Affix.Prefix_Dexterity),
+                            new ItemAffix(Affix.Prefix_Intelligence),
+                            new ItemAffix(Affix.Prefix_Strength),
                         }
                         : new[] {
-                            new ItemAffix(Affix.DodgeChance),
-                            new ItemAffix(Affix.GoldFind),
-                            new ItemAffix(Affix.HealthRegen),
-                            new ItemAffix(Affix.MagicFind),
-                            new ItemAffix(Affix.SpellRadius),
+                            new ItemAffix(Affix.Suffix_DodgeChance),
+                            new ItemAffix(Affix.Suffix_GoldFind),
+                            new ItemAffix(Affix.Suffix_HealthRegen),
+                            new ItemAffix(Affix.Suffix_MagicFind),
+                            new ItemAffix(Affix.Suffix_Projectiles),
+                            new ItemAffix(Affix.Suffix_SpellRadius),
                         });
         }
     }

@@ -22,7 +22,8 @@ namespace Crafting_System
 
         public ItemCreationService()
         {
-            Head.PopulateHeadGear(random);
+            new Head().PopulateGear(random);
+            new Chest().PopulateGear(random);
             rarityWeight.Add(Rarity.Normal, NORMAL_RARITY_WEIGHT);
             rarityWeight.Add(Rarity.Magic, MAGIC_RARITY_WEIGHT);
             rarityWeight.Add(Rarity.Rare, RARE_RARITY_WEIGHT);
@@ -30,102 +31,33 @@ namespace Crafting_System
             rarityWeight.Add(Rarity.Legendary, LEGENDARY_RARITY_WEIGHT);
             rarityWeight.Add(Rarity.Super, SUPER_RARITY_WEIGHT);
         }
+
         public AffixValue GetAffixValue(Affix affix, int level)
         {
             switch (affix)
             {
-                case Affix.Armor: return RollArmor(level);
-                case Affix.AttackSpeed: return RollLowPercentageIncrease(level);
-                case Affix.CritChance: return RollLowPercentageIncrease(level);
-                case Affix.CritDamage: return RollHighPercentageIncrease(level);
-                case Affix.Dexterity: return RollBaseStat(level);
-                case Affix.DodgeChance: return RollLowPercentageIncrease(level);
-                case Affix.GoldFind: return RollHighPercentageIncrease(level);
-                case Affix.HealthRegen: return RollLowPercentageIncrease(level);
-                case Affix.Intelligence: return RollBaseStat(level);
-                case Affix.MagicFind: return RollHighPercentageIncrease(level);
-                case Affix.MovementSpeed: return RollLowPercentageIncrease(level);
-                case Affix.Projectiles: return RollSkillOrProjectileIncrease(level);
-                case Affix.SpellRadius: return RollLowPercentageIncrease(level);
-                case Affix.Strength: return RollBaseStat(level);
-                default: return new AffixValue();
+                case Affix.Prefix_AllSkills: return new AffixCreator().RollAllSkills(level);
+                case Affix.Prefix_Armor: return new AffixCreator().RollArmor(level);
+                case Affix.Prefix_AttackSpeed: return new AffixCreator().RollAttackSpeed(level);
+                case Affix.Prefix_CooldownReduction: return new AffixCreator().RollCooldownReduction(level);
+                case Affix.Prefix_CritChance: return new AffixCreator().RollCritChance(level);
+                case Affix.Prefix_CritDamage: return new AffixCreator().RollCritDamage(level);
+                case Affix.Prefix_ColdDamage: return new AffixCreator().RollDamageIncrease(level);
+                case Affix.Prefix_FireDamage: return new AffixCreator().RollDamageIncrease(level);
+                case Affix.Prefix_LightningDamage: return new AffixCreator().RollDamageIncrease(level);
+                case Affix.Prefix_Life: return new AffixCreator().RollLife(level);
+                case Affix.Prefix_Dexterity: return new AffixCreator().RollBaseStat(level);
+                case Affix.Suffix_DodgeChance: return new AffixCreator().RollDodgeChance(level);
+                case Affix.Suffix_GoldFind: return new AffixCreator().RollGoldFind(level);
+                case Affix.Suffix_HealthRegen: return new AffixCreator().RollHealthRegen(level);
+                case Affix.Prefix_Intelligence: return new AffixCreator().RollBaseStat(level);
+                case Affix.Suffix_MagicFind: return new AffixCreator().RollMagicFind(level);
+                case Affix.Suffix_MovementSpeed: return new AffixCreator().RollMovementSpeed(level);
+                case Affix.Suffix_Projectiles: return new AffixCreator().RollProjectiles(level);
+                case Affix.Suffix_SpellRadius: return new AffixCreator().RollSpellRadius(level);
+                case Affix.Prefix_Strength: return new AffixCreator().RollBaseStat(level);
+                default: return new AffixValue(1,1,random);
             }
-        }
-        public AffixValue RollBaseStat(float level)
-        {
-            AffixValue value = level switch
-            {
-                float i when i < 10 => new AffixValue { MinValue = 1, MaxValue = 6, Value = random.Next(1, 6) },
-                float i when i >= 10 && i < 20 => new AffixValue { MinValue = 4, MaxValue = 11, Value = random.Next(4, 11) },
-                float i when i >= 20 && i < 30 => new AffixValue { MinValue = 7, MaxValue = 16, Value = random.Next(7, 16) },
-                float i when i >= 30 && i < 40 => new AffixValue { MinValue = 10, MaxValue = 21, Value = random.Next(10, 21) },
-                float i when i >= 40 && i < 50 => new AffixValue { MinValue = 13, MaxValue = 26, Value = random.Next(13, 26) },
-                float i when i >= 50 && i < 60 => new AffixValue { MinValue = 16, MaxValue = 31, Value = random.Next(16, 31) },
-                float i when i >= 60 && i < 70 => new AffixValue { MinValue = 19, MaxValue = 36, Value = random.Next(19, 36) },
-                float i when i >= 70 => new AffixValue { MinValue = 22, MaxValue = 41, Value = random.Next(22, 41) },
-                _ => new AffixValue { MinValue = 1, MaxValue = 6, Value = random.Next(1, 6) }
-            };
-            return value;
-        }
-        public AffixValue RollArmor(float level)
-        {
-            AffixValue value = level switch
-            {
-                float i when i < 10 => new AffixValue { MinValue = 4, MaxValue = 12, Value = random.Next(4, 12) },
-                float i when i >= 10 && i < 20 => new AffixValue { MinValue = 8, MaxValue = 18, Value = random.Next(8, 18) },
-                float i when i >= 20 && i < 30 => new AffixValue { MinValue = 12, MaxValue = 24, Value = random.Next(12, 24) },
-                float i when i >= 30 && i < 40 => new AffixValue { MinValue = 16, MaxValue = 30, Value = random.Next(16, 30) },
-                float i when i >= 40 && i < 50 => new AffixValue { MinValue = 20, MaxValue = 36, Value = random.Next(20, 36) },
-                float i when i >= 50 && i < 60 => new AffixValue { MinValue = 24, MaxValue = 42, Value = random.Next(24, 42) },
-                float i when i >= 60 && i < 70 => new AffixValue { MinValue = 28, MaxValue = 48, Value = random.Next(28, 48) },
-                float i when i >= 70 => new AffixValue { MinValue =32, MaxValue = 54, Value = random.Next(32, 54) },
-                _ => new AffixValue { MinValue = 4, MaxValue = 12, Value = random.Next(4, 12) }
-            };
-            return value;
-        }
-        public AffixValue RollLowPercentageIncrease(float level)
-        {
-            AffixValue value = level switch
-            {
-                float i when i < 10 => new AffixValue { MinValue = 1, MaxValue = 2, Value = random.Next(1, 2) },
-                float i when i >= 10 && i < 20 => new AffixValue { MinValue = 1, MaxValue = 3, Value = random.Next(1, 3) },
-                float i when i >= 20 && i < 30 => new AffixValue { MinValue = 2, MaxValue = 4, Value = random.Next(2, 4) },
-                float i when i >= 30 && i < 40 => new AffixValue { MinValue = 2, MaxValue = 5, Value = random.Next(2, 5) },
-                float i when i >= 40 && i < 50 => new AffixValue { MinValue = 3, MaxValue = 6, Value = random.Next(3, 6) },
-                float i when i >= 50 && i < 60 => new AffixValue { MinValue = 4, MaxValue = 7, Value = random.Next(4, 7) },
-                float i when i >= 60 && i < 70 => new AffixValue { MinValue = 4, MaxValue = 8, Value = random.Next(4, 8) },
-                float i when i >= 70 => new AffixValue { MinValue = 5, MaxValue = 9, Value = random.Next(5, 9) },
-                _ => new AffixValue { MinValue = 1, MaxValue = 2, Value = random.Next(1, 2) }
-            };
-            return value;
-        }
-        public AffixValue RollHighPercentageIncrease(float level)
-        {
-            AffixValue value = level switch
-            {
-                float i when i < 10 => new AffixValue { MinValue = 1, MaxValue = 4, Value = random.Next(1, 4) },
-                float i when i >= 10 && i < 20 => new AffixValue { MinValue = 3, MaxValue = 7, Value = random.Next(3, 7) },
-                float i when i >= 20 && i < 30 => new AffixValue { MinValue = 5, MaxValue = 10, Value = random.Next(5, 10) },
-                float i when i >= 30 && i < 40 => new AffixValue { MinValue = 7, MaxValue = 13, Value = random.Next(7, 13) },
-                float i when i >= 40 && i < 50 => new AffixValue { MinValue = 9, MaxValue = 16, Value = random.Next(9, 16) },
-                float i when i >= 50 && i < 60 => new AffixValue { MinValue = 11, MaxValue = 19, Value = random.Next(11, 19) },
-                float i when i >= 60 && i < 70 => new AffixValue { MinValue = 13, MaxValue = 22, Value = random.Next(13, 22) },
-                float i when i >= 70 => new AffixValue { MinValue = 13, MaxValue = 25, Value = random.Next(13, 25) },
-                _ => new AffixValue { MinValue = 1, MaxValue = 4, Value = random.Next(1, 4) }
-            };
-            return value;
-        }
-        public AffixValue RollSkillOrProjectileIncrease(float level)
-        {
-            AffixValue value = level switch
-            {
-                float i when i < 30 => new AffixValue { MinValue = 1, MaxValue = 1, Value = 1 },
-                float i when i >= 30 && i < 50 => new AffixValue { MinValue = 1, MaxValue = 2, Value = random.Next(1, 2) },
-                float i when i >= 50 && i < 70 => new AffixValue { MinValue = 1, MaxValue = 3, Value = random.Next(1, 3) },
-                float i when i >= 70 => new AffixValue { MinValue = 2, MaxValue = 4, Value = random.Next(2, 4) },
-                _ => new AffixValue { MinValue = 1, MaxValue = 1, Value = 1 }
-            };
-            return value;
         }
 
         public int GetBucket(int level)
@@ -145,7 +77,16 @@ namespace Crafting_System
 
         private EquipmentItem GetNonLegendaryEquipmentItem(EquipmentItem item, int level, int maxBucket)
         {
-            BaseItem basePiece = Head.GetBaseItem(level, random, item.Rarity, maxBucket);
+            BaseItem basePiece = new BaseItem();
+            switch (item.Slot)
+            {
+                case GearSlot.Head:
+                    basePiece = new Head().GetBaseItem(level, random, item.Rarity, maxBucket);
+                    break;
+                case GearSlot.Chest:
+                    basePiece = new Chest().GetBaseItem(level, random, item.Rarity, maxBucket);
+                    break;
+            }
             item.Name = basePiece.Name;
             item.BaseAffixes = basePiece.Affixes;
             item.Armor = basePiece.Armor ?? null;
@@ -157,7 +98,17 @@ namespace Crafting_System
 
         private EquipmentItem GetLegendaryEquipmentItem(EquipmentItem item, int level, int maxBucket)
         {
-            var legendaryItems = Head.GetLegendaryItems().Where(w => GetBucket(w.RequiredLevel) <= maxBucket).ToList();
+            var legendaryItems = new List<EquipmentItem>();
+            switch (item.Slot)
+            {
+                case GearSlot.Head:
+                    legendaryItems = new Head().GetLegendaryItems().Where(w => GetBucket(w.RequiredLevel) <= maxBucket).ToList();
+                    break;
+                case GearSlot.Chest:
+                    legendaryItems = new Chest().GetLegendaryItems().Where(w => GetBucket(w.RequiredLevel) <= maxBucket).ToList();
+                    break;
+            }
+
             if (legendaryItems.Any())
             {
                 var legendaryRoll = random.Next(legendaryItems.Count);
@@ -176,7 +127,7 @@ namespace Crafting_System
             EquipmentItem item = new EquipmentItem();
             item.Rarity = RollRarity(level);
 
-            if(slot == GearSlot.Head)
+            if(slot == GearSlot.Head || slot == GearSlot.Chest)
             {
                 int maxBucket = GetBucket(level);
 
@@ -244,22 +195,12 @@ namespace Crafting_System
 
             return item;
         }
+
         private ItemAffix CreateAffix(List<ItemAffix> affixes)
         {
             return affixes[random.Next(0, affixes.Count)];
         }
-        private void ShuffleList<T>(List<T> list)
-        {
-            int n = list.Count;
-            while (n > 1)
-            {
-                n--;
-                int k = random.Next(n + 1);
-                T value = list[k];
-                list[k] = list[n];
-                list[n] = value;
-            }
-        }
+
         private List<ItemAffix> RollAffixes(GearSlot slot, AffixType affixType)
         {
             Dictionary<GearSlot, List<ItemAffix>> affixPools = affixType == AffixType.Prefix
@@ -271,6 +212,7 @@ namespace Crafting_System
 
             return affixes;
         }
+
         private Rarity RollRarity(int level)
         {
             UpdateRarityWeights(level);
