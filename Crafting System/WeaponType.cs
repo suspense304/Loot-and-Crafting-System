@@ -1,12 +1,10 @@
 ﻿namespace Crafting_System
 {
-    public enum OneHandedWeapon
+    public enum WeaponType
     {
         Sword,
         Axe,
-        Dagger,
         Crossbow,
+        Wand
     }
-
-    
 }

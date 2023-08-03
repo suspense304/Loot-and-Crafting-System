@@ -1,6 +1,7 @@
 ﻿using Crafting_System.Gear;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,22 +10,20 @@ namespace Crafting_System.Interfaces
 {
     public abstract class IBaseItem
     {
-        public static List<BaseItem> _baseItems = new List<BaseItem>();
-        public static List<EquipmentItem> _legendaryItems = new List<EquipmentItem>();
         public static List<LevelBucket> _buckets = new List<LevelBucket>();
 
         public virtual void PopulateGear(Random random)
         {
-            GetLevelOneItems(random);
-            GetLevelTwoItems(random);
-            GetLevelThreeItems(random);
-            GetLevelFourItems(random);
-            GetLevelFiveItems(random);
             _buckets.Add(LevelBucket.One);
             _buckets.Add(LevelBucket.Two);
             _buckets.Add(LevelBucket.Three);
             _buckets.Add(LevelBucket.Four);
             _buckets.Add(LevelBucket.Five);
+            GetLevelOneItems(random);
+            GetLevelTwoItems(random);
+            GetLevelThreeItems(random);
+            GetLevelFourItems(random);
+            GetLevelFiveItems(random);
             PopulateLegendaryItems(random);
         }
 
@@ -33,11 +32,12 @@ namespace Crafting_System.Interfaces
 
         }
 
-        public virtual BaseItem GetBaseItem(int level, Random random, Rarity rarity, int maxBucket)
+        public virtual BaseItem? GetBaseItem(int level, Random random, Rarity rarity, int maxBucket)
         {
+            
             int itemLevel = random.Next(level - 3, level + 3);
 
-            BaseItem value = itemLevel switch
+            BaseItem? value = itemLevel switch
             {
                 int i when i < 13 => GetRandomBaseItem(maxBucket, random),
                 int i when i >= 13 && i < 26 => GetRandomBaseItem(maxBucket, random),
@@ -50,23 +50,24 @@ namespace Crafting_System.Interfaces
             return value;
         }
 
-        public virtual BaseItem GetRandomBaseItem(int maxBucket, Random random)
+        public virtual BaseItem? GetRandomBaseItem(int maxBucket, Random random)
         {
             LevelBucket bucket = _buckets[random.Next(0, maxBucket)];
 
-            List<BaseItem> weight = _baseItems.Where(w => w.LevelBucket == bucket).ToList();
-            var roll = random.Next(0, _baseItems.Where(w => w.LevelBucket == bucket).Sum(s => s.RollWeight));
+            List<BaseItem> items = ItemCreationService.BaseItems.Where(w => w.LevelBucket == bucket).ToList();
+            var roll = random.Next(0, ItemCreationService.BaseItems.Where(w => w.LevelBucket == bucket).Sum(s => s.RollWeight));
 
-            for(int i = 0; i < _baseItems.Count; i++)
+            for(int i = 0; i < ItemCreationService.BaseItems.Count; i++)
             {
-                roll -= _baseItems[i].RollWeight;
+                roll -= ItemCreationService.BaseItems[i].RollWeight;
 
                 if(roll <= 0)
                 {
-                    return weight[i];
+                    return items[i];
                 }
             }
-            return weight[0];
+
+            return null;
         }
 
         public virtual void GetLevelOneItems(Random random)
@@ -99,7 +100,7 @@ namespace Crafting_System.Interfaces
         }
         public List<EquipmentItem> GetLegendaryItems()
         {
-            return _legendaryItems;
+            return ItemCreationService.LegendaryItems;
         }
     }
 }

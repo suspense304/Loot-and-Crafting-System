@@ -1,5 +1,6 @@
 using Crafting_System.Gear;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.Reflection;
 
 namespace Crafting_System
@@ -39,53 +40,48 @@ namespace Crafting_System
         private void btn_Create_Inventory_Click(object sender, EventArgs e)
         {
             lstInventory.Items.Clear();
-            for (int i = 0; i < 10000; i++)
+            foreach (var item in ItemCreationService.BaseItems)
             {
-                bool weaponDrop = random.Next(0, 100) < 11;
-                if (weaponDrop)
-                {
-                    EquipmentItem equipmentItem = itemCreationService.CreateEquipmentItem(
-                                        Convert.ToInt16(txtLevel.Text), gearService.GetRandomGearSlot(random));
-                    switch (equipmentItem.Rarity)
-                    {
-                        case Rarity.Normal: normalItems++; break;
-                        case Rarity.Magic: magicItems++; break;
-                        case Rarity.Rare: rareItems++; break;
-                        case Rarity.Epic: epicItems++; break;
-                        case Rarity.Legendary: legendaryItems++; break;
-                        case Rarity.Super: superItems++; break;
-                    }
-                }
+                lstInventory.Items.Add(item.Name);
             }
 
-            lstInventory.Items.Add($"Normal: {normalItems}");
-            lstInventory.Items.Add($"Magic: {magicItems}");
-            lstInventory.Items.Add($"Rare: {rareItems}");
-            lstInventory.Items.Add($"Epic: {epicItems}");
-            lstInventory.Items.Add($"Legendary: {legendaryItems}");
-            lstInventory.Items.Add($"Super: {superItems}");
-        }
+            lblInventoryCount.Text = lstInventory.Items.Count.ToString();
+            //for (int i = 0; i < 10000; i++)
+            //{
+            //    bool weaponDrop = random.Next(0, 100) < 11;
+            //    if (weaponDrop)
+            //    {
+            //        EquipmentItem equipmentItem = itemCreationService.CreateEquipmentItem(
+            //                            Convert.ToInt16(txtLevel.Text), gearService.GetRandomGearSlot(random));
+            //        if (equipmentItem == null) continue;
+            //        switch (equipmentItem.Rarity)
+            //        {
+            //            case Rarity.Normal: normalItems++; break;
+            //            case Rarity.Magic: magicItems++; break;
+            //            case Rarity.Rare: rareItems++; break;
+            //            case Rarity.Epic: epicItems++; break;
+            //            case Rarity.Legendary: legendaryItems++; break;
+            //            case Rarity.Super: superItems++; break;
+            //        }
+            //    }
+            //}
 
-        private void AddItemToList(EquipmentItem equipmentItem)
-        {
-            switch (equipmentItem.Rarity)
-            {
-                case Rarity.Normal: normalItems++; break;
-                case Rarity.Magic: magicItems++; break;
-                case Rarity.Rare: rareItems++; break;
-                case Rarity.Epic: epicItems++; break;
-                case Rarity.Legendary: legendaryItems++; break;
-                case Rarity.Super: superItems++; break;
-            }
+            //lstInventory.Items.Add($"Normal: {normalItems}");
+            //lstInventory.Items.Add($"Magic: {magicItems}");
+            //lstInventory.Items.Add($"Rare: {rareItems}");
+            //lstInventory.Items.Add($"Epic: {epicItems}");
+            //lstInventory.Items.Add($"Legendary: {legendaryItems}");
+            //lstInventory.Items.Add($"Super: {superItems}");
         }
-
         private void btnCreate_Item_1_Click(object sender, EventArgs e)
         {
-            EquipmentItem equipmentItem = itemCreationService.CreateEquipmentItem(Convert.ToInt16(txtLevel.Text), gearService.GetRandomGearSlot(random));
-            AddItemToList(equipmentItem);
+            EquipmentItem equipmentItem = new EquipmentItem();
+            equipmentItem = itemCreationService.CreateEquipmentItem(Convert.ToInt16(txtLevel.Text), gearService.GetRandomGearSlot(random));
+
+            if (equipmentItem == null) return;
 
             lblItem1.Text = equipmentItem.Name;
-            lblItem1_Level.Text = "LEVEL: " + equipmentItem.RequiredLevel.ToString();
+            lblItem1_Level.Text = "LEVEL: " + equipmentItem.RequiredLevel.ToString() + " " + equipmentItem.Slot;
 
             if (equipmentItem.Armor != null) lblItem1_Armor_Damage.Text = "Armor: " + equipmentItem.Armor.ToString();
             if (equipmentItem.AttackDamage != null) lblItem1_Armor_Damage.Text = "Damage: " + equipmentItem.AttackDamage.ToString();
@@ -160,7 +156,10 @@ namespace Crafting_System
         }
         private void btnCreate_Item_2_Click(object sender, EventArgs e)
         {
-            EquipmentItem equipmentItem = itemCreationService.CreateEquipmentItem(Convert.ToInt16(txtLevel.Text), gearService.GetRandomGearSlot(random));
+            EquipmentItem equipmentItem = new EquipmentItem();
+            equipmentItem = itemCreationService.CreateEquipmentItem(Convert.ToInt16(txtLevel.Text), gearService.GetRandomGearSlot(random));
+
+            if (equipmentItem == null) return;
 
             lblItem2.Text = equipmentItem.Name;
             lblItem2_Level.Text = "LEVEL: " + equipmentItem.RequiredLevel.ToString();
@@ -235,6 +234,11 @@ namespace Crafting_System
                     lblItem2_suffix_2.Text = $"{equipmentItem.Suffixes[1].Affix.GetDisplayName()} - {equipmentItem.Suffixes[1].Values.Value} ( {equipmentItem.Suffixes[1].Values.MinValue} - {equipmentItem.Suffixes[1].Values.MaxValue} )";
                     lblItem2_suffix_3.Text = $"{equipmentItem.Suffixes[2].Affix.GetDisplayName()} - {equipmentItem.Suffixes[2].Values.Value} ( {equipmentItem.Suffixes[2].Values.MinValue} - {equipmentItem.Suffixes[2].Values.MaxValue} )";
                     break;
+            }
+
+            if (equipmentItem.Name == "Physical Chaos" || equipmentItem.Name == "Elemental Chaos")
+            {
+                Debug.WriteLine("Got one");
             }
         }
 

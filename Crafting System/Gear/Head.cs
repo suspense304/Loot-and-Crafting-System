@@ -13,7 +13,7 @@ namespace Crafting_System.Gear
     {
         public override void PopulateLegendaryItems(Random random)
         {
-            _legendaryItems.Add(new EquipmentItem
+            ItemCreationService.LegendaryItems.Add(new EquipmentItem
             {
                 Name = "Kalen's Crown",
                 Armor = 188,
@@ -88,7 +88,7 @@ namespace Crafting_System.Gear
 
         public override void GetLevelOneItems(Random random)
         {
-            _baseItems.Add(new BaseItem
+            ItemCreationService.BaseItems.Add(new BaseItem
             {
                 Name = HeadItems.LevelOneStr.GetDisplayName(),
                 Armor = random.Next(4, 10),
@@ -103,7 +103,7 @@ namespace Crafting_System.Gear
                 LevelBucket = LevelBucket.One,
                 RequiredLevel = 3,
             });
-            _baseItems.Add(new BaseItem
+            ItemCreationService.BaseItems.Add(new BaseItem
             {
                 Name = HeadItems.LevelOneDex.GetDisplayName(),
                 Armor = random.Next(3, 6),
@@ -118,7 +118,7 @@ namespace Crafting_System.Gear
                 LevelBucket = LevelBucket.One,
                 RequiredLevel = 3,
             });
-            _baseItems.Add(new BaseItem
+            ItemCreationService.BaseItems.Add(new BaseItem
             {
                 Name = HeadItems.LevelOneInt.GetDisplayName(),
                 Armor = random.Next(1, 4),
@@ -137,7 +137,7 @@ namespace Crafting_System.Gear
 
         public override void GetLevelTwoItems(Random random)
         {
-            _baseItems.Add(new BaseItem
+            ItemCreationService.BaseItems.Add(new BaseItem
             {
                 Name = HeadItems.LevelTwoStr.GetDisplayName(),
                 Armor = random.Next(18, 30),
@@ -152,7 +152,7 @@ namespace Crafting_System.Gear
                 LevelBucket = LevelBucket.Two,
                 RequiredLevel = 13,
             });
-            _baseItems.Add(new BaseItem
+            ItemCreationService.BaseItems.Add(new BaseItem
             {
                 Name = HeadItems.LevelTwoDex.GetDisplayName(),
                 Armor = random.Next(12, 23),
@@ -167,7 +167,7 @@ namespace Crafting_System.Gear
                 LevelBucket = LevelBucket.Two,
                 RequiredLevel = 13,
             });
-            _baseItems.Add(new BaseItem
+            ItemCreationService.BaseItems.Add(new BaseItem
             {
                 Name = HeadItems.LevelTwoInt.GetDisplayName(),
                 Armor = random.Next(7, 16),
@@ -186,7 +186,7 @@ namespace Crafting_System.Gear
 
         public override void GetLevelThreeItems(Random random)
         {
-            _baseItems.Add(new BaseItem
+            ItemCreationService.BaseItems.Add(new BaseItem
             {
                 Name = HeadItems.LevelThreeStr.GetDisplayName(),
                 Armor = random.Next(28, 45),
@@ -201,7 +201,7 @@ namespace Crafting_System.Gear
                 LevelBucket = LevelBucket.Three,
                 RequiredLevel = 26,
             });
-            _baseItems.Add(new BaseItem
+            ItemCreationService.BaseItems.Add(new BaseItem
             {
                 Name = HeadItems.LevelThreeDex.GetDisplayName(),
                 Armor = random.Next(24, 37),
@@ -216,7 +216,7 @@ namespace Crafting_System.Gear
                 LevelBucket = LevelBucket.Three,
                 RequiredLevel = 26,
             });
-            _baseItems.Add(new BaseItem
+            ItemCreationService.BaseItems.Add(new BaseItem
             {
                 Name = HeadItems.LevelThreeInt.GetDisplayName(),
                 Armor = random.Next(21, 30),
@@ -235,7 +235,7 @@ namespace Crafting_System.Gear
 
         public override void GetLevelFourItems(Random random)
         {
-            _baseItems.Add(new BaseItem
+            ItemCreationService.BaseItems.Add(new BaseItem
             {
                 Name = HeadItems.LevelFourStr.GetDisplayName(),
                 Armor = random.Next(70, 102),
@@ -250,7 +250,7 @@ namespace Crafting_System.Gear
                 LevelBucket = LevelBucket.Four,
                 RequiredLevel = 39,
             });
-            _baseItems.Add(new BaseItem
+            ItemCreationService.BaseItems.Add(new BaseItem
             {
                 Name = HeadItems.LevelFourDex.GetDisplayName(),
                 Armor = random.Next(45, 73),
@@ -265,7 +265,7 @@ namespace Crafting_System.Gear
                 LevelBucket = LevelBucket.Four,
                 RequiredLevel = 39,
             });
-            _baseItems.Add(new BaseItem
+            ItemCreationService.BaseItems.Add(new BaseItem
             {
                 Name = HeadItems.LevelFourInt.GetDisplayName(),
                 Armor = random.Next(34, 61),
@@ -284,7 +284,7 @@ namespace Crafting_System.Gear
 
         public override void GetLevelFiveItems(Random random)
         {
-            _baseItems.Add(new BaseItem
+            ItemCreationService.BaseItems.Add(new BaseItem
             {
                 Name = HeadItems.LevelFiveStr.GetDisplayName(),
                 Armor = random.Next(124, 155),
@@ -299,7 +299,7 @@ namespace Crafting_System.Gear
                 LevelBucket = LevelBucket.Five,
                 RequiredLevel = 55,
             });
-            _baseItems.Add(new BaseItem
+            ItemCreationService.BaseItems.Add(new BaseItem
             {
                 Name = HeadItems.LevelFiveDex.GetDisplayName(),
                 Armor = random.Next(65, 104),
@@ -314,7 +314,7 @@ namespace Crafting_System.Gear
                 LevelBucket = LevelBucket.Five,
                 RequiredLevel = 55,
             });
-            _baseItems.Add(new BaseItem
+            ItemCreationService.BaseItems.Add(new BaseItem
             {
                 Name = HeadItems.LevelFiveInt.GetDisplayName(),
                 Armor = random.Next(58, 92),
@@ -369,6 +369,4 @@ namespace Crafting_System.Gear
         [Display(Name = "Ranger's Cap")] // Level Five
         LevelFiveDex,
     }
-
-
 }

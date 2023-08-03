@@ -9,56 +9,99 @@ using System.Xml.Linq;
 
 namespace Crafting_System.Gear
 {
-    public partial class Chest : IBaseItem
+    public class OffHandItem : IBaseItem
     {
         public override void PopulateLegendaryItems(Random random)
         {
+            random.Next();
             ItemCreationService.LegendaryItems.Add(new EquipmentItem
             {
-                Name = "Commander's Plate",
-                Armor = 455,
+                Name = "Last Stand",
+                Armor = 550,
                 Rarity = Rarity.Legendary,
                 RequiredLevel = 55,
-                Slot = GearSlot.Chest,
-                BaseAffixes = new List<ItemAffix>
+                Slot = GearSlot.OffHand,
+                BaseAffixes = new List<ItemAffix>(),
+                Prefixes = new List<ItemAffix>
                 {
+                    new ItemAffix(Affix.Prefix_Strength)
+                    {
+                        Values = new AffixValue(70, 100, random),
+                    },
                     new ItemAffix(Affix.Prefix_Life)
                     {
-                        Values = new AffixValue(180, 245, random),
+                        Values = new AffixValue(125, 250, random),
                     },
-                    new ItemAffix(Affix.Prefix_Armor)
+                },
+                Suffixes = new List<ItemAffix>(),
+            });
+
+            ItemCreationService.LegendaryItems.Add(new EquipmentItem
+            {
+                Name = "Twisted Evil",
+                Rarity = Rarity.Legendary,
+                RequiredLevel = 55,
+                Slot = GearSlot.OffHand,
+                BaseAffixes = new List<ItemAffix>(),
+                Prefixes = new List<ItemAffix>
+                {
+                    new ItemAffix(Affix.Prefix_LightningDamage)
                     {
-                        Values = new AffixValue(135, 188, random),
+                        Values = new AffixValue(125, 250, random),
+                    },
+                    new ItemAffix(Affix.Prefix_LightningSkills)
+                    {
+                        Values = new AffixValue(1, 4, random),
+                    },
+                },
+                Suffixes = new List<ItemAffix>(),
+            });
+
+            ItemCreationService.LegendaryItems.Add(new EquipmentItem
+            {
+                Name = "Enoch's Quiver",
+                Rarity = Rarity.Legendary,
+                RequiredLevel = 55,
+                Slot = GearSlot.OffHand,
+                BaseAffixes = new List<ItemAffix>
+                {
+                    new ItemAffix(Affix.Prefix_AttackSpeed)
+                    {
+                        Values = new AffixValue(30, 50, random),
+                    },
+                    new ItemAffix(Affix.Prefix_Dexterity)
+                    {
+                        Values = new AffixValue(30, 40, random),
                     },
                 },
                 Prefixes = new List<ItemAffix>
                 {
-                    new ItemAffix(Affix.Prefix_AllSkills)
+                    new ItemAffix(Affix.Prefix_CritChance)
+                    {
+                        Values = new AffixValue(5, 10, random),
+                    },
+                    new ItemAffix(Affix.Prefix_CritDamage)
+                    {
+                        Values = new AffixValue(50, 100, random),
+                    },
+                    new ItemAffix(Affix.Prefix_ColdSkills)
                     {
                         Values = new AffixValue(1, 3, random),
-                    },
-                    new ItemAffix(Affix.Suffix_DodgeChance)
-                    {
-                        Values = new AffixValue(10, 15, random),
-                    },
-                    new ItemAffix(Affix.Prefix_Strength)
-                    {
-                        Values = new AffixValue(35, 55, random),
                     },
                 },
                 Suffixes = new List<ItemAffix>
                 {
-                    new ItemAffix(Affix.Suffix_HealthRegen)
+                    new ItemAffix(Affix.Suffix_MovementSpeed)
                     {
-                        Values = new AffixValue(4, 6, random),
+                        Values = new AffixValue(7, 15, random),
                     },
-                    new ItemAffix(Affix.Suffix_DodgeChance)
+                    new ItemAffix(Affix.Suffix_Projectiles)
                     {
-                        Values = new AffixValue(10, 15, random),
+                        Values = new AffixValue(2, 5, random),
                     },
-                    new ItemAffix(Affix.Suffix_MagicFind)
+                    new ItemAffix(Affix.Suffix_GoldFind)
                     {
-                        Values = new AffixValue(10, 15, random),
+                        Values = new AffixValue(50, 100, random),
                     },
                 },
             });
@@ -67,30 +110,29 @@ namespace Crafting_System.Gear
         public override void GetAffixes(AffixType affixType, List<ItemAffix> affixes)
         {
             affixes.AddRange(affixType == AffixType.Prefix
-                        ? new[] {
+                         ? new[] {
+                            new ItemAffix(Affix.Prefix_AttackSpeed),
                             new ItemAffix(Affix.Prefix_CritChance),
                             new ItemAffix(Affix.Prefix_CritDamage),
                             new ItemAffix(Affix.Prefix_Dexterity),
-                            new ItemAffix(Affix.Prefix_ColdDamage),
-                            new ItemAffix(Affix.Prefix_FireDamage),
-                            new ItemAffix(Affix.Prefix_LightningDamage),
                             new ItemAffix(Affix.Prefix_Intelligence),
                             new ItemAffix(Affix.Prefix_Strength),
-                        }
-                        : new[] {
+                         }
+                         : new[] {
                             new ItemAffix(Affix.Suffix_DodgeChance),
                             new ItemAffix(Affix.Suffix_GoldFind),
                             new ItemAffix(Affix.Suffix_HealthRegen),
                             new ItemAffix(Affix.Suffix_MagicFind),
+                            new ItemAffix(Affix.Suffix_Projectiles),
                             new ItemAffix(Affix.Suffix_SpellRadius),
-                        });
+                         });
         }
 
         public override void GetLevelOneItems(Random random)
         {
             ItemCreationService.BaseItems.Add(new BaseItem
             {
-                Name = ChestItems.LevelOneStr.GetDisplayName(),
+                Name = OffhandItems.LevelOneShield.GetDisplayName(),
                 Armor = random.Next(4, 10),
                 Affixes = new List<ItemAffix>
                 {
@@ -105,7 +147,7 @@ namespace Crafting_System.Gear
             });
             ItemCreationService.BaseItems.Add(new BaseItem
             {
-                Name = ChestItems.LevelOneDex.GetDisplayName(),
+                Name = OffhandItems.LevelOneTome.GetDisplayName(),
                 Armor = random.Next(3, 6),
                 Affixes = new List<ItemAffix>
                 {
@@ -120,7 +162,7 @@ namespace Crafting_System.Gear
             });
             ItemCreationService.BaseItems.Add(new BaseItem
             {
-                Name = ChestItems.LevelOneInt.GetDisplayName(),
+                Name = OffhandItems.LevelOneQuiver.GetDisplayName(),
                 Armor = random.Next(1, 4),
                 Affixes = new List<ItemAffix>
                 {
@@ -139,7 +181,7 @@ namespace Crafting_System.Gear
         {
             ItemCreationService.BaseItems.Add(new BaseItem
             {
-                Name = ChestItems.LevelTwoStr.GetDisplayName(),
+                Name = OffhandItems.LevelTwoShield.GetDisplayName(),
                 Armor = random.Next(18, 30),
                 Affixes = new List<ItemAffix>
                 {
@@ -154,7 +196,7 @@ namespace Crafting_System.Gear
             });
             ItemCreationService.BaseItems.Add(new BaseItem
             {
-                Name = ChestItems.LevelTwoDex.GetDisplayName(),
+                Name = OffhandItems.LevelTwoQuiver.GetDisplayName(),
                 Armor = random.Next(12, 23),
                 Affixes = new List<ItemAffix>
                 {
@@ -169,7 +211,7 @@ namespace Crafting_System.Gear
             });
             ItemCreationService.BaseItems.Add(new BaseItem
             {
-                Name = ChestItems.LevelTwoInt.GetDisplayName(),
+                Name = OffhandItems.LevelTwoTome.GetDisplayName(),
                 Armor = random.Next(7, 16),
                 Affixes = new List<ItemAffix>
                 {
@@ -188,7 +230,7 @@ namespace Crafting_System.Gear
         {
             ItemCreationService.BaseItems.Add(new BaseItem
             {
-                Name = ChestItems.LevelThreeStr.GetDisplayName(),
+                Name = OffhandItems.LevelThreeShield.GetDisplayName(),
                 Armor = random.Next(28, 45),
                 Affixes = new List<ItemAffix>
                 {
@@ -203,7 +245,7 @@ namespace Crafting_System.Gear
             });
             ItemCreationService.BaseItems.Add(new BaseItem
             {
-                Name = ChestItems.LevelThreeDex.GetDisplayName(),
+                Name = OffhandItems.LevelThreeQuiver.GetDisplayName(),
                 Armor = random.Next(24, 37),
                 Affixes = new List<ItemAffix>
                 {
@@ -218,7 +260,7 @@ namespace Crafting_System.Gear
             });
             ItemCreationService.BaseItems.Add(new BaseItem
             {
-                Name = ChestItems.LevelThreeInt.GetDisplayName(),
+                Name = OffhandItems.LevelThreeTome.GetDisplayName(),
                 Armor = random.Next(21, 30),
                 Affixes = new List<ItemAffix>
                 {
@@ -237,7 +279,7 @@ namespace Crafting_System.Gear
         {
             ItemCreationService.BaseItems.Add(new BaseItem
             {
-                Name = ChestItems.LevelFourStr.GetDisplayName(),
+                Name = OffhandItems.LevelFourShield.GetDisplayName(),
                 Armor = random.Next(70, 102),
                 Affixes = new List<ItemAffix>
                 {
@@ -252,7 +294,7 @@ namespace Crafting_System.Gear
             });
             ItemCreationService.BaseItems.Add(new BaseItem
             {
-                Name = ChestItems.LevelFourDex.GetDisplayName(),
+                Name = OffhandItems.LevelFourQuiver.GetDisplayName(),
                 Armor = random.Next(45, 73),
                 Affixes = new List<ItemAffix>
                 {
@@ -267,7 +309,7 @@ namespace Crafting_System.Gear
             });
             ItemCreationService.BaseItems.Add(new BaseItem
             {
-                Name = ChestItems.LevelFourInt.GetDisplayName(),
+                Name = OffhandItems.LevelFourTome.GetDisplayName(),
                 Armor = random.Next(34, 61),
                 Affixes = new List<ItemAffix>
                 {
@@ -286,7 +328,7 @@ namespace Crafting_System.Gear
         {
             ItemCreationService.BaseItems.Add(new BaseItem
             {
-                Name = ChestItems.LevelFiveStr.GetDisplayName(),
+                Name = OffhandItems.LevelFiveShield.GetDisplayName(),
                 Armor = random.Next(124, 155),
                 Affixes = new List<ItemAffix>
                 {
@@ -301,7 +343,7 @@ namespace Crafting_System.Gear
             });
             ItemCreationService.BaseItems.Add(new BaseItem
             {
-                Name = ChestItems.LevelFiveDex.GetDisplayName(),
+                Name = OffhandItems.LevelFiveQuiver.GetDisplayName(),
                 Armor = random.Next(65, 104),
                 Affixes = new List<ItemAffix>
                 {
@@ -316,7 +358,7 @@ namespace Crafting_System.Gear
             });
             ItemCreationService.BaseItems.Add(new BaseItem
             {
-                Name = ChestItems.LevelFiveInt.GetDisplayName(),
+                Name = OffhandItems.LevelFiveTome.GetDisplayName(),
                 Armor = random.Next(58, 92),
                 Affixes = new List<ItemAffix>
                 {
@@ -332,41 +374,41 @@ namespace Crafting_System.Gear
         }
     }
 
-    enum ChestItems
+    enum OffhandItems
     {
-        [Display(Name = "Worn Chest")] // Level One
-        LevelOneStr,
-        [Display(Name = "Torn Robe")] // Level One
-        LevelOneInt,
-        [Display(Name = "Worn Vest")] // Level One
-        LevelOneDex,
+        [Display(Name = "Worn Shield")] // Level One
+        LevelOneShield,
+        [Display(Name = "Worn Quiver")] // Level One
+        LevelOneQuiver,
+        [Display(Name = "Worn Tome")] // Level One
+        LevelOneTome,
 
-        [Display(Name = "Padded Chest")] // Level Two
-        LevelTwoStr,
-        [Display(Name = "Cloth Robe")] // Level Two
-        LevelTwoInt,
-        [Display(Name = "Cloth Vest")] // Level Two
-        LevelTwoDex,
+        [Display(Name = "Wooden Shield")] // Level Two
+        LevelTwoShield,
+        [Display(Name = "Wooden Quiver")] // Level Two
+        LevelTwoQuiver,
+        [Display(Name = "Wooden Tome")] // Level Two
+        LevelTwoTome,
 
-        [Display(Name = "Reinforced Chest")] // Level Three
-        LevelThreeStr,
-        [Display(Name = "Silk Robe")] // Level Three
-        LevelThreeInt,
-        [Display(Name = "Fitted Vest")] // Level Three
-        LevelThreeDex,
+        [Display(Name = "Leather Shield")] // Level Three
+        LevelThreeShield,
+        [Display(Name = "Leather Quiver")] // Level Three
+        LevelThreeQuiver,
+        [Display(Name = "Leather Tome")] // Level Three
+        LevelThreeTome,
 
-        [Display(Name = "Polished Chest")] // Level Four
-        LevelFourStr,
-        [Display(Name = "Stylish Robe")] // Level Four
-        LevelFourInt,
-        [Display(Name = "Hardened Vest")] // Level Four
-        LevelFourDex,
+        [Display(Name = "Iron Shield")] // Level Four
+        LevelFourShield,
+        [Display(Name = "Iron Quiver")] // Level Four
+        LevelFourQuiver,
+        [Display(Name = "Iron Tome")] // Level Four
+        LevelFourTome,
 
-        [Display(Name = "Gladiator Plate")] // Level Five
-        LevelFiveStr,
-        [Display(Name = "Wizard's Robe")] // Level Five
-        LevelFiveInt,
-        [Display(Name = "Ranger's Vest")] // Level Five
-        LevelFiveDex,
+        [Display(Name = "Diamond Shield")] // Level Five
+        LevelFiveShield,
+        [Display(Name = "Diamond Quiver")] // Level Five
+        LevelFiveQuiver,
+        [Display(Name = "Diamond Tome")] // Level Five
+        LevelFiveTome,
     }
 }

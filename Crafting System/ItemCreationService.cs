@@ -10,8 +10,12 @@ namespace Crafting_System
 
     public class ItemCreationService
     {
+        public static ItemCreationService Instance;
         private Random random = new Random();
         private Dictionary<Rarity, int> rarityWeight = new Dictionary<Rarity, int>();
+
+        public static List<BaseItem> BaseItems = new List<BaseItem>();
+        public static List<EquipmentItem> LegendaryItems = new List<EquipmentItem>();
 
         int NORMAL_RARITY_WEIGHT = 600;
         int MAGIC_RARITY_WEIGHT = 250;
@@ -22,8 +26,18 @@ namespace Crafting_System
 
         public ItemCreationService()
         {
-            new Head().PopulateGear(random);
+            Instance = this;
+            new Amulet().PopulateGear(random);
+            new Belt().PopulateGear(random);
+            new Boots().PopulateGear(random);
             new Chest().PopulateGear(random);
+            new Gloves().PopulateGear(random);
+            new Head().PopulateGear(random);
+            new MainHand().PopulateGear(random);
+            new OffHandItem().PopulateGear(random);
+            new Pants().PopulateGear(random);
+            new Ring().PopulateGear(random);
+            new Shoulders().PopulateGear(random);
             rarityWeight.Add(Rarity.Normal, NORMAL_RARITY_WEIGHT);
             rarityWeight.Add(Rarity.Magic, MAGIC_RARITY_WEIGHT);
             rarityWeight.Add(Rarity.Rare, RARE_RARITY_WEIGHT);
@@ -36,26 +50,26 @@ namespace Crafting_System
         {
             switch (affix)
             {
-                case Affix.Prefix_AllSkills: return new AffixCreator().RollAllSkills(level);
-                case Affix.Prefix_Armor: return new AffixCreator().RollArmor(level);
-                case Affix.Prefix_AttackSpeed: return new AffixCreator().RollAttackSpeed(level);
-                case Affix.Prefix_CooldownReduction: return new AffixCreator().RollCooldownReduction(level);
-                case Affix.Prefix_CritChance: return new AffixCreator().RollCritChance(level);
-                case Affix.Prefix_CritDamage: return new AffixCreator().RollCritDamage(level);
-                case Affix.Prefix_ColdDamage: return new AffixCreator().RollDamageIncrease(level);
-                case Affix.Prefix_FireDamage: return new AffixCreator().RollDamageIncrease(level);
-                case Affix.Prefix_LightningDamage: return new AffixCreator().RollDamageIncrease(level);
-                case Affix.Prefix_Life: return new AffixCreator().RollLife(level);
-                case Affix.Prefix_Dexterity: return new AffixCreator().RollBaseStat(level);
-                case Affix.Suffix_DodgeChance: return new AffixCreator().RollDodgeChance(level);
-                case Affix.Suffix_GoldFind: return new AffixCreator().RollGoldFind(level);
-                case Affix.Suffix_HealthRegen: return new AffixCreator().RollHealthRegen(level);
-                case Affix.Prefix_Intelligence: return new AffixCreator().RollBaseStat(level);
-                case Affix.Suffix_MagicFind: return new AffixCreator().RollMagicFind(level);
-                case Affix.Suffix_MovementSpeed: return new AffixCreator().RollMovementSpeed(level);
-                case Affix.Suffix_Projectiles: return new AffixCreator().RollProjectiles(level);
-                case Affix.Suffix_SpellRadius: return new AffixCreator().RollSpellRadius(level);
-                case Affix.Prefix_Strength: return new AffixCreator().RollBaseStat(level);
+                case Affix.Prefix_AllSkills: return new AffixCreator().RollAllSkills(level, random);
+                case Affix.Prefix_Armor: return new AffixCreator().RollArmor(level, random);
+                case Affix.Prefix_AttackSpeed: return new AffixCreator().RollAttackSpeed(level, random);
+                case Affix.Prefix_CooldownReduction: return new AffixCreator().RollCooldownReduction(level, random);
+                case Affix.Prefix_CritChance: return new AffixCreator().RollCritChance(level, random);
+                case Affix.Prefix_CritDamage: return new AffixCreator().RollCritDamage(level, random);
+                case Affix.Prefix_ColdDamage: return new AffixCreator().RollDamageIncrease(level, random);
+                case Affix.Prefix_FireDamage: return new AffixCreator().RollDamageIncrease(level, random);
+                case Affix.Prefix_LightningDamage: return new AffixCreator().RollDamageIncrease(level, random);
+                case Affix.Prefix_Life: return new AffixCreator().RollLife(level, random);
+                case Affix.Prefix_Dexterity: return new AffixCreator().RollBaseStat(level, random);
+                case Affix.Suffix_DodgeChance: return new AffixCreator().RollDodgeChance(level, random);
+                case Affix.Suffix_GoldFind: return new AffixCreator().RollGoldFind(level, random);
+                case Affix.Suffix_HealthRegen: return new AffixCreator().RollHealthRegen(level, random);
+                case Affix.Prefix_Intelligence: return new AffixCreator().RollBaseStat(level, random);
+                case Affix.Suffix_MagicFind: return new AffixCreator().RollMagicFind(level, random);
+                case Affix.Suffix_MovementSpeed: return new AffixCreator().RollMovementSpeed(level, random);
+                case Affix.Suffix_Projectiles: return new AffixCreator().RollProjectiles(level, random);
+                case Affix.Suffix_SpellRadius: return new AffixCreator().RollSpellRadius(level, random);
+                case Affix.Prefix_Strength: return new AffixCreator().RollBaseStat(level, random);
                 default: return new AffixValue(1,1,random);
             }
         }
@@ -75,18 +89,49 @@ namespace Crafting_System
             return value;
         }
 
-        private EquipmentItem GetNonLegendaryEquipmentItem(EquipmentItem item, int level, int maxBucket)
+        private EquipmentItem? GetNonLegendaryEquipmentItem(EquipmentItem item, int level, int maxBucket)
         {
-            BaseItem basePiece = new BaseItem();
+            BaseItem? basePiece = new BaseItem();
             switch (item.Slot)
             {
-                case GearSlot.Head:
-                    basePiece = new Head().GetBaseItem(level, random, item.Rarity, maxBucket);
+                case GearSlot.Amulet:
+                    basePiece = new Amulet().GetBaseItem(level, random, item.Rarity, maxBucket);
+                    break;
+                case GearSlot.Belt:
+                    basePiece = new Belt().GetBaseItem(level, random, item.Rarity, maxBucket);
+                    break;
+                case GearSlot.Boots:
+                    basePiece = new Boots().GetBaseItem(level, random, item.Rarity, maxBucket);
                     break;
                 case GearSlot.Chest:
                     basePiece = new Chest().GetBaseItem(level, random, item.Rarity, maxBucket);
                     break;
+                case GearSlot.Gloves:
+                    basePiece = new Gloves().GetBaseItem(level, random, item.Rarity, maxBucket);
+                    break;
+                case GearSlot.Head:
+                    basePiece = new Head().GetBaseItem(level, random, item.Rarity, maxBucket);
+                    break;
+                case GearSlot.MainHand:
+                    basePiece = new MainHand().GetBaseItem(level, random, item.Rarity, maxBucket);
+                    break;
+                case GearSlot.OffHand:
+                    basePiece = new OffHandItem().GetBaseItem(level, random, item.Rarity, maxBucket);
+                    break;
+                case GearSlot.Pants:
+                    basePiece = new Pants().GetBaseItem(level, random, item.Rarity, maxBucket);
+                    break;
+                case GearSlot.Ring:
+                    basePiece = new Ring().GetBaseItem(level, random, item.Rarity, maxBucket);
+                    break;
+                case GearSlot.Shoulders:
+                    basePiece = new Shoulders().GetBaseItem(level, random, item.Rarity, maxBucket);
+                    break;
+
             }
+
+            if (basePiece == null) return null;
+
             item.Name = basePiece.Name;
             item.BaseAffixes = basePiece.Affixes;
             item.Armor = basePiece.Armor ?? null;
@@ -96,16 +141,44 @@ namespace Crafting_System
             return item;
         }
 
-        private EquipmentItem GetLegendaryEquipmentItem(EquipmentItem item, int level, int maxBucket)
+        private EquipmentItem? GetLegendaryEquipmentItem(EquipmentItem? item, int level, int maxBucket)
         {
+            if(item == null) return null;
             var legendaryItems = new List<EquipmentItem>();
             switch (item.Slot)
             {
-                case GearSlot.Head:
-                    legendaryItems = new Head().GetLegendaryItems().Where(w => GetBucket(w.RequiredLevel) <= maxBucket).ToList();
+                case GearSlot.Amulet:
+                    legendaryItems = new Amulet().GetLegendaryItems().Where(w => GetBucket(w.RequiredLevel) <= maxBucket).ToList();
+                    break;
+                case GearSlot.Belt:
+                    legendaryItems = new Belt().GetLegendaryItems().Where(w => GetBucket(w.RequiredLevel) <= maxBucket).ToList();
+                    break;
+                case GearSlot.Boots:
+                    legendaryItems = new Boots().GetLegendaryItems().Where(w => GetBucket(w.RequiredLevel) <= maxBucket).ToList();
                     break;
                 case GearSlot.Chest:
                     legendaryItems = new Chest().GetLegendaryItems().Where(w => GetBucket(w.RequiredLevel) <= maxBucket).ToList();
+                    break;
+                case GearSlot.Gloves:
+                    legendaryItems = new Gloves().GetLegendaryItems().Where(w => GetBucket(w.RequiredLevel) <= maxBucket).ToList();
+                    break;
+                case GearSlot.Head:
+                    legendaryItems = new Head().GetLegendaryItems().Where(w => GetBucket(w.RequiredLevel) <= maxBucket).ToList();
+                    break;
+                case GearSlot.MainHand:
+                    legendaryItems = new MainHand().GetLegendaryItems().Where(w => GetBucket(w.RequiredLevel) <= maxBucket).ToList();
+                    break;
+                case GearSlot.OffHand:
+                    legendaryItems = new OffHandItem().GetLegendaryItems().Where(w => GetBucket(w.RequiredLevel) <= maxBucket).ToList();
+                    break;
+                case GearSlot.Pants:
+                    legendaryItems = new Pants().GetLegendaryItems().Where(w => GetBucket(w.RequiredLevel) <= maxBucket).ToList();
+                    break;
+                case GearSlot.Ring:
+                    legendaryItems = new Ring().GetLegendaryItems().Where(w => GetBucket(w.RequiredLevel) <= maxBucket).ToList();
+                    break;
+                case GearSlot.Shoulders:
+                    legendaryItems = new Shoulders().GetLegendaryItems().Where(w => GetBucket(w.RequiredLevel) <= maxBucket).ToList();
                     break;
             }
 
@@ -113,6 +186,10 @@ namespace Crafting_System
             {
                 var legendaryRoll = random.Next(legendaryItems.Count);
                 item = legendaryItems[legendaryRoll];
+                if(item != null)
+                {
+                    RerollAffixes(item, level);
+                }
             } else
             {
                 item.Rarity = Rarity.Epic;
@@ -122,31 +199,46 @@ namespace Crafting_System
             return item;
         }
 
-        public EquipmentItem CreateEquipmentItem(int level, GearSlot slot)
+        public EquipmentItem RerollAffixes(EquipmentItem item, int level)
         {
-            EquipmentItem item = new EquipmentItem();
-            item.Rarity = RollRarity(level);
-
-            if(slot == GearSlot.Head || slot == GearSlot.Chest)
+            foreach(ItemAffix affix in item.BaseAffixes)
             {
-                int maxBucket = GetBucket(level);
-
-                if (item.Rarity == Rarity.Legendary)
-                {
-                    item = GetLegendaryEquipmentItem(item, level, maxBucket);
-
-                } else
-                {
-                    item = GetNonLegendaryEquipmentItem(item, level, maxBucket);
-                }
-            } 
-            else
-            {
-                item.Name = item.Rarity.ToString();
+                affix.Values = new ItemCreationService().GetAffixValue(affix.Affix, level);
             }
-            
+
+            foreach (ItemAffix affix in item.Prefixes)
+            {
+                affix.Values = new ItemCreationService().GetAffixValue(affix.Affix, level);
+            }
+
+            foreach (ItemAffix affix in item.Suffixes)
+            {
+                affix.Values = new ItemCreationService().GetAffixValue(affix.Affix, level);
+            }
+
+            return item;
+        }
+
+        public EquipmentItem? CreateEquipmentItem(int level, GearSlot slot)
+        {
+            EquipmentItem? item = new EquipmentItem();
+            item.Rarity = RollRarity(level);
             item.Slot = slot;
 
+            int maxBucket = GetBucket(level);
+
+            if (item.Rarity == Rarity.Legendary)
+            {
+                item = GetLegendaryEquipmentItem(item, level, maxBucket);
+
+            } else
+            {
+                item = GetNonLegendaryEquipmentItem(item, level, maxBucket);
+            }
+
+            if (item == null) return null;
+
+            item.Slot = slot;
 
             List<ItemAffix> prefixes = RollAffixes(slot, AffixType.Prefix);
             List<ItemAffix> suffixes = RollAffixes(slot, AffixType.Suffix);

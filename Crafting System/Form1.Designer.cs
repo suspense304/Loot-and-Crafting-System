@@ -62,6 +62,7 @@
             txtLevel = new TextBox();
             label2 = new Label();
             button1 = new Button();
+            lblInventoryCount = new Label();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             SuspendLayout();
@@ -397,11 +398,20 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
+            // lblInventoryCount
+            // 
+            lblInventoryCount.AutoSize = true;
+            lblInventoryCount.Location = new Point(717, 795);
+            lblInventoryCount.Name = "lblInventoryCount";
+            lblInventoryCount.Size = new Size(0, 25);
+            lblInventoryCount.TabIndex = 19;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1258, 1004);
+            Controls.Add(lblInventoryCount);
             Controls.Add(button1);
             Controls.Add(label2);
             Controls.Add(txtLevel);
@@ -468,5 +478,6 @@
         private Label lblItem2_Level;
         private Label lblItem1_Level;
         private Button button1;
+        private Label lblInventoryCount;
     }
 }

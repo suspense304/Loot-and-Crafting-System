@@ -61,34 +61,34 @@ namespace Crafting_System.Gear
                     new Head().GetAffixes(affixType, affixes);
                     break;
                 case GearSlot.Shoulders:
-                    Shoulders.GetAffixes(affixType, affixes);
+                    new Shoulders().GetAffixes(affixType, affixes);
                     break;
                 case GearSlot.Chest:
                     new Chest().GetAffixes(affixType, affixes);
                     break;
                 case GearSlot.Gloves:
-                    Gloves.GetAffixes(affixType, affixes);
+                    new Gloves().GetAffixes(affixType, affixes);
                     break;
                 case GearSlot.Belt:
-                    Belt.GetAffixes(affixType, affixes);
+                    new Belt().GetAffixes(affixType, affixes);
                     break;
                 case GearSlot.Pants:
-                    Pants.GetAffixes(affixType, affixes);
+                    new Pants().GetAffixes(affixType, affixes);
                     break;
                 case GearSlot.Boots:
-                    Boots.GetAffixes(affixType, affixes);
+                    new Boots().GetAffixes(affixType, affixes);
                     break;
                 case GearSlot.Ring:
-                    Ring.GetAffixes(affixType, affixes);
+                    new Ring().GetAffixes(affixType, affixes);
                     break;
                 case GearSlot.Amulet:
-                    Amulet.GetAffixes(affixType, affixes);
+                    new Amulet().GetAffixes(affixType, affixes);
                     break;
                 case GearSlot.MainHand:
-                    MainHand.GetAffixes(affixType, affixes);
+                    new MainHand().GetAffixes(affixType, affixes);
                     break;
                 case GearSlot.OffHand:
-                    Gear.OffHand.GetAffixes(affixType, affixes);
+                    new OffHandItem().GetAffixes(affixType, affixes);
                     break;
                 default:
                     break;

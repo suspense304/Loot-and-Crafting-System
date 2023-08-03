@@ -37,7 +37,7 @@ namespace Crafting_System
         {
             MinValue = minValue;
             MaxValue = maxValue;
-            Value = random.Next((int)MinValue, (int)MaxValue);
+            Value = random.Next((int)MinValue, (int)MaxValue + 1);
         }
     }
 
