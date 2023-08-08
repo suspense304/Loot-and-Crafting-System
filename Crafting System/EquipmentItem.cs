@@ -50,12 +50,10 @@
         {
             switch(Rarity)
             {
-                case Rarity.Normal: return 0;
+                case Rarity.Normal: return 1;
                 case Rarity.Magic: return 2;
-                case Rarity.Rare: return 3;
-                case Rarity.Epic: return 4;
-                case Rarity.Legendary: return 5;
-                case Rarity.Super: return 6;
+                case Rarity.Rare: return 4;
+                case Rarity.Legendary: return 6;
             }
 
             return 0;

@@ -41,35 +41,32 @@ namespace Crafting_System
             rarityWeight.Add(Rarity.Normal, NORMAL_RARITY_WEIGHT);
             rarityWeight.Add(Rarity.Magic, MAGIC_RARITY_WEIGHT);
             rarityWeight.Add(Rarity.Rare, RARE_RARITY_WEIGHT);
-            rarityWeight.Add(Rarity.Epic, EPIC_RARITY_WEIGHT);
             rarityWeight.Add(Rarity.Legendary, LEGENDARY_RARITY_WEIGHT);
-            rarityWeight.Add(Rarity.Super, SUPER_RARITY_WEIGHT);
         }
 
         public AffixValue GetAffixValue(Affix affix, int level)
         {
             switch (affix)
             {
-                case Affix.Prefix_AllSkills: return new AffixCreator().RollAllSkills(level, random);
                 case Affix.Prefix_Armor: return new AffixCreator().RollArmor(level, random);
                 case Affix.Prefix_AttackSpeed: return new AffixCreator().RollAttackSpeed(level, random);
                 case Affix.Prefix_CooldownReduction: return new AffixCreator().RollCooldownReduction(level, random);
                 case Affix.Prefix_CritChance: return new AffixCreator().RollCritChance(level, random);
                 case Affix.Prefix_CritDamage: return new AffixCreator().RollCritDamage(level, random);
-                case Affix.Prefix_ColdDamage: return new AffixCreator().RollDamageIncrease(level, random);
-                case Affix.Prefix_FireDamage: return new AffixCreator().RollDamageIncrease(level, random);
-                case Affix.Prefix_LightningDamage: return new AffixCreator().RollDamageIncrease(level, random);
+                case Affix.Prefix_PhysicalDamage: return new AffixCreator().RollDamageIncrease(level, random);
+                case Affix.Prefix_SpellDamage: return new AffixCreator().RollDamageIncrease(level, random);
                 case Affix.Prefix_Life: return new AffixCreator().RollLife(level, random);
-                case Affix.Prefix_Dexterity: return new AffixCreator().RollBaseStat(level, random);
                 case Affix.Suffix_DodgeChance: return new AffixCreator().RollDodgeChance(level, random);
                 case Affix.Suffix_GoldFind: return new AffixCreator().RollGoldFind(level, random);
                 case Affix.Suffix_HealthRegen: return new AffixCreator().RollHealthRegen(level, random);
-                case Affix.Prefix_Intelligence: return new AffixCreator().RollBaseStat(level, random);
                 case Affix.Suffix_MagicFind: return new AffixCreator().RollMagicFind(level, random);
+                case Affix.Suffix_MobDensity: return new AffixCreator().RollCritChance(level, random);
                 case Affix.Suffix_MovementSpeed: return new AffixCreator().RollMovementSpeed(level, random);
+                case Affix.Suffix_PickupRadius: return new AffixCreator().RollMovementSpeed(level, random);
                 case Affix.Suffix_Projectiles: return new AffixCreator().RollProjectiles(level, random);
+                case Affix.Suffix_SpellDuration: return new AffixCreator().RollSpellRadius(level, random);
                 case Affix.Suffix_SpellRadius: return new AffixCreator().RollSpellRadius(level, random);
-                case Affix.Prefix_Strength: return new AffixCreator().RollBaseStat(level, random);
+                
                 default: return new AffixValue(1,1,random);
             }
         }
@@ -192,7 +189,7 @@ namespace Crafting_System
                 }
             } else
             {
-                item.Rarity = Rarity.Epic;
+                item.Rarity = Rarity.Rare;
                 item = GetNonLegendaryEquipmentItem(item, level, maxBucket);
             }
 
@@ -310,9 +307,7 @@ namespace Crafting_System
             UpdateRarityWeights(level);
             int weight = rarityWeight.Sum(x => x.Value);
             int roll = random.Next(1, weight);
-            if (roll < rarityWeight[Rarity.Super]) return Rarity.Super;
             if (roll < rarityWeight[Rarity.Legendary]) return Rarity.Legendary;
-            if (roll < rarityWeight[Rarity.Epic]) return Rarity.Epic;
             if (roll < rarityWeight[Rarity.Rare]) return Rarity.Rare;
             if (roll < rarityWeight[Rarity.Magic]) return Rarity.Magic;
             
@@ -325,41 +320,31 @@ namespace Crafting_System
             switch(level)
             {
                 case int i when i < 13:
-                    rarityWeight[Rarity.Super] = 0;
                     rarityWeight[Rarity.Legendary] = 0;
-                    rarityWeight[Rarity.Epic] = 20;
                     rarityWeight[Rarity.Rare] = 100;
                     rarityWeight[Rarity.Magic] = 300;
                     rarityWeight[Rarity.Normal] = 800;
                     break;
                 case int i when i >= 13 && i < 26:
-                    rarityWeight[Rarity.Super] = 0;
                     rarityWeight[Rarity.Legendary] = 1;
-                    rarityWeight[Rarity.Epic] = 40;
                     rarityWeight[Rarity.Rare] = 120;
                     rarityWeight[Rarity.Magic] = 300;
                     rarityWeight[Rarity.Normal] = 500;
                     break;
                 case int i when i >= 26 && i < 39:
-                    rarityWeight[Rarity.Super] = 2;
                     rarityWeight[Rarity.Legendary] = 5;
-                    rarityWeight[Rarity.Epic] = 100;
                     rarityWeight[Rarity.Rare] = 300;
                     rarityWeight[Rarity.Magic] = 800;
                     rarityWeight[Rarity.Normal] = 300;
                     break;
                 case int i when i >= 39 && i < 55:
-                    rarityWeight[Rarity.Super] = 3;
                     rarityWeight[Rarity.Legendary] = 25;
-                    rarityWeight[Rarity.Epic] = 150;
                     rarityWeight[Rarity.Rare] = 400;
                     rarityWeight[Rarity.Magic] = 800;
                     rarityWeight[Rarity.Normal] = 0;
                     break;
                 case int i when i >= 55:
-                    rarityWeight[Rarity.Super] = 25;
                     rarityWeight[Rarity.Legendary] = 100;
-                    rarityWeight[Rarity.Epic] = 250;
                     rarityWeight[Rarity.Rare] = 600;
                     rarityWeight[Rarity.Magic] = 0;
                     rarityWeight[Rarity.Normal] = 0;

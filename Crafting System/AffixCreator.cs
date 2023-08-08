@@ -8,19 +8,6 @@ namespace Crafting_System
 {
     public class AffixCreator
     {
-        public AffixValue RollAllSkills(float level, Random random) 
-        {
-            AffixValue value = level switch
-            {
-                float i when i < 30 => new AffixValue(1, 1, random),
-                float i when i >= 30 && i < 55 => new AffixValue(1, 2, random),
-                float i when i >= 55 => new AffixValue(1, 3, random),
-                _ => new AffixValue(1, 1, random)
-            };
-
-            return value;
-        }
-
         public AffixValue RollArmor(float level, Random random) 
         {
             AffixValue value = level switch
@@ -96,21 +83,6 @@ namespace Crafting_System
 
         }
 
-        public AffixValue RollColdDamage(float level, Random random) 
-        {
-            return RollDamageIncrease(level, random);
-        }
-
-        public AffixValue RollFireDamage(float level, Random random) 
-        {
-            return RollDamageIncrease(level, random);
-        }
-
-        public AffixValue RollLightningDamage(float level, Random random) 
-        {
-            return RollDamageIncrease(level, random);
-        }
-
         public AffixValue RollLife(float level, Random random) 
         {
             AffixValue value = level switch
@@ -127,11 +99,6 @@ namespace Crafting_System
             };
 
             return value;
-        }
-
-        public AffixValue RollDexterity(float level, Random random) 
-        {
-            return RollBaseStat(level, random);
         }
 
         public AffixValue RollDodgeChance(float level, Random random) 
@@ -171,11 +138,6 @@ namespace Crafting_System
             };
 
             return value;
-        }
-
-        public AffixValue RollIntelligence(float level, Random random) 
-        {
-            return RollBaseStat(level, random);
         }
 
         public AffixValue RollMagicFind(float level, Random random) 
@@ -227,28 +189,6 @@ namespace Crafting_System
                 _ => new AffixValue(5, 10, random)
             };
 
-            return value;
-        }
-
-        public AffixValue RollStrength(float level, Random random) 
-        {
-            return RollBaseStat(level, random);
-        }
-
-        public AffixValue RollBaseStat(float level, Random random) 
-        {
-            AffixValue value = level switch
-            {
-                float i when i < 10 => new AffixValue(1, 6, random),
-                float i when i >= 10 && i < 20 => new AffixValue(4, 11, random),
-                float i when i >= 20 && i < 30 => new AffixValue(7, 16, random),
-                float i when i >= 30 && i < 40 => new AffixValue(10, 21, random),
-                float i when i >= 40 && i < 50 => new AffixValue(13, 26, random),
-                float i when i >= 50 && i < 60 => new AffixValue(16, 31, random),
-                float i when i >= 60 && i < 70 => new AffixValue(19, 36, random),
-                float i when i >= 70 => new AffixValue(22, 41, random),
-                _ => new AffixValue(1, 6, random)
-            };
             return value;
         }
 

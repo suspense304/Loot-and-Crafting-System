@@ -5,8 +5,6 @@
         Normal,
         Magic,
         Rare,
-        Epic,
         Legendary,
-        Super,
     }
 }

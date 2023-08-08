@@ -29,7 +29,32 @@ namespace Crafting_System.Interfaces
 
         public virtual void GetAffixes(AffixType affixType, List<ItemAffix> affixes)
         {
-
+            affixes.AddRange(affixType == AffixType.Prefix
+                        ? new[] {
+                            new ItemAffix(Affix.Prefix_Armor),
+                            new ItemAffix(Affix.Prefix_AttackRadius),
+                            new ItemAffix(Affix.Prefix_AttackSpeed),
+                            new ItemAffix(Affix.Prefix_CooldownReduction),
+                            new ItemAffix(Affix.Prefix_CritChance),
+                            new ItemAffix(Affix.Prefix_CritDamage),
+                            new ItemAffix(Affix.Prefix_Life),
+                            new ItemAffix(Affix.Prefix_PhysicalDamage),
+                            new ItemAffix(Affix.Prefix_SpellDamage),
+                        }
+                        : new[] {
+                            new ItemAffix(Affix.Suffix_DodgeChance),
+                            new ItemAffix(Affix.Suffix_ExperienceGain),
+                            new ItemAffix(Affix.Suffix_GoldFind),
+                            new ItemAffix(Affix.Suffix_HealthRegen),
+                            new ItemAffix(Affix.Suffix_MagicFind),
+                            new ItemAffix(Affix.Suffix_MobDensity),
+                            new ItemAffix(Affix.Suffix_MovementSpeed),
+                            new ItemAffix(Affix.Suffix_PickupRadius),
+                            new ItemAffix(Affix.Suffix_Projectiles),
+                            new ItemAffix(Affix.Suffix_ProjectileSpeed),
+                            new ItemAffix(Affix.Suffix_SpellDuration),
+                            new ItemAffix(Affix.Suffix_SpellRadius),
+                        });
         }
 
         public virtual BaseItem? GetBaseItem(int level, Random random, Rarity rarity, int maxBucket)
@@ -55,6 +80,9 @@ namespace Crafting_System.Interfaces
             LevelBucket bucket = _buckets[random.Next(0, maxBucket)];
 
             List<BaseItem> items = ItemCreationService.BaseItems.Where(w => w.LevelBucket == bucket).ToList();
+
+            if(items.Count == 0) return null;
+
             var roll = random.Next(0, ItemCreationService.BaseItems.Where(w => w.LevelBucket == bucket).Sum(s => s.RollWeight));
 
             for(int i = 0; i < ItemCreationService.BaseItems.Count; i++)
